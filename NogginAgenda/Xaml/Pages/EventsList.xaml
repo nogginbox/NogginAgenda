@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage
+	xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	xmlns:noggin="clr-namespace:NogginAgenda;assembly=NogginAgenda"
+	x:Class="NogginAgenda.EventsListPage">
+	<ContentPage.Content>
+		<StackLayout>
+			<Label Text="{Binding Name}" />
+			<ListView ItemsSource="{Binding Talks}">
+				<ListView.ItemTemplate>
+					<DataTemplate>
+						<ViewCell>
+							<noggin:TalkSummary />
+						</ViewCell>
+					</DataTemplate>
+				</ListView.ItemTemplate>
+			</ListView>
+		</StackLayout>
+
+	</ContentPage.Content>
+</ContentPage>
