@@ -4,9 +4,9 @@ using Xamarin.Forms;
 
 namespace NogginAgenda
 {	
-	public partial class EventsListPage : ContentPage
+	public partial class TalkDescriptionPage : ContentPage
 	{	
-		public EventsListPage ()
+		public TalkDescriptionPage ()
 		{
 			InitializeComponent ();
 		}

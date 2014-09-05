@@ -3,11 +3,14 @@
 	xmlns="http://xamarin.com/schemas/2014/forms"
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 	xmlns:noggin="clr-namespace:NogginAgenda;assembly=NogginAgenda"
-	x:Class="NogginAgenda.EventsListPage">
+	x:Class="NogginAgenda.TalksListPage"
+	Padding="10">
 	<ContentPage.Content>
 		<StackLayout>
-			<Label Text="{Binding Name}" />
-			<ListView ItemsSource="{Binding Talks}">
+			<Label Text="{Binding ShortName}" Font="Large" XAlign="Center" />
+			<ListView x:Name="TalksList"
+				ItemsSource="{Binding Talks}"
+				ItemSelected="OnTalkSelected">
 				<ListView.ItemTemplate>
 					<DataTemplate>
 						<ViewCell>

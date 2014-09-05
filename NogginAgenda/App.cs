@@ -13,10 +13,16 @@ namespace NogginAgenda
 		{	
 			InitEventData ();
 
-			var page = new EventsListPage();
-			page.BindingContext = EventData;
+			var slotsPage = new CarouselPage {
+				Title = "DDD North 2014",
+				ItemsSource = EventData.Slots,
+				ItemTemplate =  new DataTemplate(() =>
+				{
+					return new TalksListPage();
+				})
+			};
 
-			return page;
+			return new NavigationPage(slotsPage);
 		}
 
 		private static void InitEventData()

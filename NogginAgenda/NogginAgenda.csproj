@@ -32,11 +32,14 @@
   <ItemGroup>
     <Compile Include="App.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Xaml\Pages\EventsList.cs">
-      <DependentUpon>EventsList.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Xaml\TalkSummary.xaml.cs">
       <DependentUpon>TalkSummary.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Xaml\Pages\TalkDescriptionPage.xaml.cs">
+      <DependentUpon>TalkDescriptionPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Xaml\Pages\TalksListPage.cs">
+      <DependentUpon>TalksListPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
@@ -63,10 +66,13 @@
     <Folder Include="Xaml\Pages\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Xaml\Pages\EventsList.xaml">
+    <EmbeddedResource Include="Xaml\TalkSummary.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="Xaml\TalkSummary.xaml">
+    <EmbeddedResource Include="Xaml\Pages\TalkDescriptionPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Xaml\Pages\TalksListPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
   </ItemGroup>

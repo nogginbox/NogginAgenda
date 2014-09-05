@@ -17,6 +17,13 @@ namespace NogginAgenda.Data
 				return String.Format("{0:t} - {1:t}", StartTime, EndTime);
 			}
 		}
+
+		public String Title
+		{
+			get{
+				return ShortName;
+			}
+		}
 	}
 }
 
