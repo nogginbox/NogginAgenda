@@ -13,7 +13,11 @@ using Xamarin.Forms.Platform.Android;
 
 namespace NogginAgenda.Android
 {
-	[Activity (Label = "NogginAgenda.Android.Android", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+	[Activity (
+		Label = "DDD North 2014",
+		Icon="@drawable/Icon",
+		MainLauncher = true,
+		ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
 	public class MainActivity : AndroidActivity
 	{
 		protected override void OnCreate (Bundle bundle)
