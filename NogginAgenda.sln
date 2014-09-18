@@ -87,6 +87,6 @@ Global
 		{754025FB-E28C-4CA6-A1D4-100D24926B12}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = iOS\NogginAgenda.iOS.csproj
+		StartupItem = Android\NogginAgenda.Android.csproj
 	EndGlobalSection
 EndGlobal
