@@ -2,10 +2,12 @@
 <ContentView
 	xmlns="http://xamarin.com/schemas/2014/forms"
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-	x:Class="NogginAgenda.TalkSummary">
+	x:Class="NogginAgenda.TalkSummary"
+	Padding="0,10">
 	<ContentView.Content>
 		<StackLayout>
 			<Label Text="{Binding Title}" />
+			<Label Text="{Binding Speaker.Name}" Font="Small" />
 		</StackLayout>
 	</ContentView.Content>
 </ContentView>

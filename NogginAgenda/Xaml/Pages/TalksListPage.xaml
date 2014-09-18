@@ -10,7 +10,8 @@
 			<Label Text="{Binding ShortName}" Font="Large" XAlign="Center" />
 			<ListView x:Name="TalksList"
 				ItemsSource="{Binding Talks}"
-				ItemSelected="OnTalkSelected">
+				ItemSelected="OnTalkSelected"
+				RowHeight="100">
 				<ListView.ItemTemplate>
 					<DataTemplate>
 						<ViewCell>

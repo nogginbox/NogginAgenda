@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using Xamarin.Forms;
-using NogginAgenda.Data;
-using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using NogginAgenda.Data;
+using Xamarin.Forms;
+using NogginAgenda.DataExchange.Model;
 
 namespace NogginAgenda
 {
@@ -47,7 +48,17 @@ namespace NogginAgenda
 
 		private static EventAgenda CreateEventDataFromJsonData(IList<TalkData> talksJson)
 		{
-			var talks = talksJson.Select (t => new Talk { Title = t.title });
+			var talks = talksJson.Select (t => 
+				new Talk
+				{
+					Title = t.title,
+					Description = t.description,
+					Speaker = new Speaker
+					{
+						Name = t.speaker
+					}
+				}
+			);
 
 			var eventData = new EventAgenda
 			{
@@ -55,13 +66,13 @@ namespace NogginAgenda
 				Slots = new List<TimeSlot>
 				{
 					new TimeSlot {
-						StartTime = new DateTime(2014, 01,01, 9,0,0),
-						EndTime = new DateTime(2014, 01,01, 10,0,0),
+						StartTime = new DateTime(2014, 01, 01, 9, 0, 0),
+						EndTime = new DateTime(2014, 01, 01, 10, 0, 0),
 						Talks = talks.Take(10).ToList()
 					},
 					new TimeSlot {
-						StartTime = new DateTime(2014, 01,01, 9,0,0),
-						EndTime = new DateTime(2014, 01,01, 10,0,0),
+						StartTime = new DateTime(2014, 01, 01, 10, 0, 0),
+						EndTime = new DateTime(2014, 01,01, 11, 0, 0),
 						Talks = talks.Skip(10).Take(10).ToList()
 					},
 				}
@@ -83,4 +94,3 @@ namespace NogginAgenda
 		}
 	}
 }
-

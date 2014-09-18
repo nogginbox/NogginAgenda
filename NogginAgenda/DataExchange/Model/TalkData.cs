@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace NogginAgenda
+namespace NogginAgenda.DataExchange.Model
 {
 	public class TalkData
 	{
