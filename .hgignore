@@ -1,0 +1,6 @@
+syntax: glob
+NogginAgenda.Data/obj/*
+NogginAgenda.WinPhone/Bin/*
+NogginAgenda.WinPhone/obj/*
+NogginAgenda/obj/*
+NogginAgenda/bin/*
