@@ -11,7 +11,7 @@
 			<ListView x:Name="TalksList"
 				ItemsSource="{Binding Talks}"
 				ItemSelected="OnTalkSelected"
-				RowHeight="100">
+				RowHeight="80">
 				<ListView.ItemTemplate>
 					<DataTemplate>
 						<ViewCell>

@@ -6,8 +6,8 @@
 	Padding="0,10">
 	<ContentView.Content>
 		<StackLayout>
-			<Label Text="{Binding Title}" />
-			<Label Text="{Binding Speaker.Name}" Font="Small" />
+			<Label Text="{Binding Title}" Font="Bold,Small" />
+			<Label Text="{Binding Speaker.Name}" Font="Micro" />
 		</StackLayout>
 	</ContentView.Content>
 </ContentView>

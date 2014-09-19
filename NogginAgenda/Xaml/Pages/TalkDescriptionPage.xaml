@@ -4,12 +4,33 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 	x:Class="NogginAgenda.TalkDescriptionPage"
 	Padding="10"
-	Title="{Binding Title}">
+	Title="{Binding TimeAndRoom}">
 	<ContentPage.Content>
-		<StackLayout>
-			<Label Text="{Binding Title}" Font="Large" />
-			<Label Text="{Binding Speaker.Name}" />
-			<Label Text="{Binding Description}" />
-		</StackLayout>
+		<Grid>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="80" />
+				<RowDefinition Height="*" />
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="60" />
+				<ColumnDefinition Width="*" />
+			</Grid.ColumnDefinitions>
+				
+			<StackLayout Grid.Column="1">
+				<Label Text="{Binding Title}" Font="Bold,Small" />
+				<Label Text="{Binding Speaker.Name}" Font="Micro" />
+			</StackLayout>
+
+			<Image Source="{Binding Speaker.PictureUrl}" WidthRequest="100" HeightRequest="100" VerticalOptions="Start" />
+
+			<ScrollView Grid.Row="1" Grid.ColumnSpan="2">
+				<StackLayout>
+					
+					<Label Text="{Binding Description}" Font="Small" />
+				</StackLayout>
+
+			</ScrollView>
+		</Grid>
+
 	</ContentPage.Content>
 </ContentPage>

@@ -55,11 +55,14 @@ namespace NogginAgenda
 					Description = t.description,
 					Speaker = new Speaker
 					{
-						Name = t.speaker
+						Name = t.speaker,
+						PictureUrl = t.speakerimage,
+						WebsiteUrl = t.speakerlink
 					}
 				}
 			);
 
+			// Temp: For now put talks in random slots
 			var eventData = new EventAgenda
 			{
 				EventName = "DDD North 2014",
@@ -77,6 +80,15 @@ namespace NogginAgenda
 					},
 				}
 			};
+
+			// Link up timeslots
+			foreach (var slot in eventData.Slots)
+			{
+				foreach (var talk in slot.Talks)
+				{
+					talk.TimeSlot = slot;
+				}
+			}
 
 			return eventData;
 		}
