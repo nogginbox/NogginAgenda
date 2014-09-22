@@ -48,8 +48,13 @@ namespace NogginAgenda
 
 		private static EventAgenda CreateEventDataFromJsonData(IList<TalkData> talksJson)
 		{
-			var talks = talksJson.Select (t => 
-				new Talk
+			var eventData = new EventAgenda {
+				EventName = "DDD North 2014"
+			};
+
+			foreach (var t in talksJson)
+			{
+				var newTalk = new Talk
 				{
 					Title = t.title,
 					Description = t.description,
@@ -59,28 +64,18 @@ namespace NogginAgenda
 						PictureUrl = t.speakerimage,
 						WebsiteUrl = t.speakerlink
 					}
-				}
-			);
+				};
 
-			// Temp: For now put talks in random slots
-			var eventData = new EventAgenda
-			{
-				EventName = "DDD North 2014",
-				Slots = new List<TimeSlot>
-				{
-					new TimeSlot {
-						StartTime = new DateTime(2014, 01, 01, 9, 0, 0),
-						EndTime = new DateTime(2014, 01, 01, 10, 0, 0),
-						Talks = talks.Take(10).ToList()
-					},
-					new TimeSlot {
-						StartTime = new DateTime(2014, 01, 01, 10, 0, 0),
-						EndTime = new DateTime(2014, 01,01, 11, 0, 0),
-						Talks = talks.Skip(10).Take(10).ToList()
-					},
-				}
-			};
+				var newSlot = new TimeSlot(t.slot);
+				var existingSlot = eventData.Slots.FirstOrDefault (s => newSlot.Equals(s));
 
+				if (existingSlot == null) {
+					eventData.Slots.Add(newSlot);
+				}
+
+				(existingSlot ?? newSlot).Talks.Add (newTalk);
+			}
+				
 			// Link up timeslots
 			foreach (var slot in eventData.Slots)
 			{
@@ -89,6 +84,8 @@ namespace NogginAgenda
 					talk.TimeSlot = slot;
 				}
 			}
+
+			eventData.Slots = eventData.Slots.OrderBy (s => s.StartTime).ToList();
 
 			return eventData;
 		}

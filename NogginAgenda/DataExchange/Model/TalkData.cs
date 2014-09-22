@@ -10,5 +10,10 @@ namespace NogginAgenda.DataExchange.Model
 		public String speaker { get; set; }
 		public String description { get; set;}
 		public String title { get; set; }
+
+		/// <summary>
+		/// Format: yyyy-mm-dd h:mm,yyyy-mm-dd h:mm
+		/// </summary>
+		public String slot { get; set; }
 	}
 }

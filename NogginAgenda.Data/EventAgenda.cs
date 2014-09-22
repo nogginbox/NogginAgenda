@@ -6,6 +6,11 @@ namespace NogginAgenda.Data
 {
 	public class EventAgenda
 	{
+		public EventAgenda()
+		{
+			Slots = new List<TimeSlot>();
+		}
+
 		public String EventName { get; set; }
 
 		public IList<TimeSlot> Slots { get; set; }
