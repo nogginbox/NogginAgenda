@@ -22,6 +22,11 @@
 			</StackLayout>
 
 			<Image Source="{Binding Speaker.PictureUrl}" WidthRequest="100" HeightRequest="100" VerticalOptions="Start" />
+			<!--<Image WidthRequest="100" HeightRequest="100" VerticalOptions="Start">
+    			<Image.Source>
+      				<UriImageSource Uri="{Binding Speaker.PictureUrl}" CacheValidity="5" />
+    			</Image.Source>
+  			</Image>-->
 
 			<ScrollView Grid.Row="1" Grid.ColumnSpan="2">
 				<StackLayout>
