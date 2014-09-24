@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NogginAgenda.Data;
 using Xamarin.Forms;
 using NogginAgenda.DataExchange.Model;
+using PCLStorage;
 
 namespace NogginAgenda
 {
@@ -92,12 +94,53 @@ namespace NogginAgenda
 
 		private static String GetJson()
 		{
+			DateTime saveFileAge;
+
 			String json;
-			using (var webClient = new HttpClient ())
-			{
-				json = webClient.GetStringAsync (RemoteDataPath).Result;
+
+			var rootFolder = FileSystem.Current.LocalStorage;
+			var folder = rootFolder.CreateFolderAsync("Caches", CreationCollisionOption.OpenIfExists).Result;
+
+			try{
+				var file = folder.GetFileAsync("agenda.json").Result;
+				json = file.ReadAllTextAsync().Result;
+
+				// Todo: Get saveFileAge from the file
+				saveFileAge = DateTime.Now.AddMinutes(-5);
 			}
-			// Todo: catch errors, 404 prob means newer version
+			catch(Exception) {
+				saveFileAge = DateTime.MinValue;
+			}
+
+			using (var client = new HttpClient ())
+			{
+				client.DefaultRequestHeaders.IfModifiedSince = saveFileAge;
+
+				var response = client.GetAsync(RemoteDataPath).Result;
+
+				if (response.IsSuccessStatusCode)
+				{
+					json = response.Content.ReadAsStringAsync ().Result;
+				}
+				else
+				{
+					switch (response.StatusCode)
+					{
+						case HttpStatusCode.NotModified:
+							json = "";
+							break;
+						case HttpStatusCode.NotFound:
+							// Someone has moved the data, ask user to check for new version
+							json = "";
+							break;
+					default:
+						throw new Exception ("Network issue, I should show you summat nice");
+					}
+
+				}
+
+
+			}
 
 			return json;
 		}
