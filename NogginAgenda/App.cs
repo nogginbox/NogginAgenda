@@ -19,7 +19,7 @@ namespace NogginAgenda
 		private const String RemoteDataPath = "http://www.garsonix.co.uk/temp/dddnorth2014.js";
 		private const String JsonCacheFileName = "agenda.json";
 		private static String _cacheFolder;
-
+		private static String _errorMessage = "";
 
 		public static EventAgenda EventData { get; private set; }
 
@@ -30,11 +30,23 @@ namespace NogginAgenda
 
 			var slotsPage = new CarouselPage {
 				Title = "DDD North 2014",
-				ItemsSource = EventData.Slots,
+				ItemsSource = (EventData != null) ? EventData.Slots : null,
 				ItemTemplate =  new DataTemplate(() =>
 				{
 					return new TalksListPage();
 				})
+			};
+
+			slotsPage.Appearing += (object sender, EventArgs e) => {
+				if(!String.IsNullOrEmpty(_errorMessage))
+				{
+					var errorTitle = (EventData == null)
+						? "Error"
+						: "Warning";
+
+					(sender as Page).DisplayAlert(errorTitle, _errorMessage, "OK");
+					// Todo: can cancel when no data close the app
+				}
 			};
 
 			return new NavigationPage(slotsPage);
@@ -46,12 +58,17 @@ namespace NogginAgenda
 			// If newer: Download and cache
 			// If older: Load cached version
 
-			var json = GetJson();
+			try{
+				var json = GetJson();
 
-			// Now parse with JSON.Net
-			var jsonData = JsonConvert.DeserializeObject<DataHolder>(json);
+				// Now parse with JSON.Net
+				var jsonData = JsonConvert.DeserializeObject<DataHolder>(json);
 
-			EventData = CreateEventDataFromJsonData(jsonData.Data);
+				EventData = CreateEventDataFromJsonData(jsonData.Data);
+			}
+			catch(Exception e) {
+				_errorMessage = e.Message;
+			}
 		}
 
 		private static EventAgenda CreateEventDataFromJsonData(IList<TalkData> talksJson)
@@ -142,22 +159,16 @@ namespace NogginAgenda
 					{
 						case HttpStatusCode.NotModified:
 							// Cached is newer. So just use this
-							break;
+							return json;
 						case HttpStatusCode.NotFound:
 							// Someone has moved the data, ask user to check for new version
-							if(String.IsNullOrWhiteSpace(json))
-							{
-								throw new Exception("The data for this conference has moved. You may need to update this app.");	
-							}
-							// Show a warning saying the data has moved so this may not be up to date
-							// ?? page.DisplayAlert ??
-							break;
-						default:
-							if (String.IsNullOrWhiteSpace (json)) {
-							throw new Exception ("Network issue, I should show you summat nice");
-							}
-							// Todo: Show warning?: Data may be old
-							break;
+							_errorMessage = "The data for this conference has moved. Please check to see if there is an updated version of this app.";
+							return json;
+					default:
+						if (String.IsNullOrEmpty (json)) {
+							throw new Exception ("We can't connect to the Internet right now to get the agenda.");
+						}
+						return json;
 					}
 				}
 			}
