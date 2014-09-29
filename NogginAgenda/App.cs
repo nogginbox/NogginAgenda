@@ -3,23 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NogginAgenda.Data;
 using Xamarin.Forms;
 using NogginAgenda.DataExchange.Model;
 using PCLStorage;
+using System.Threading.Tasks;
 
 namespace NogginAgenda
 {
 	public class App
 	{
 		private const String RemoteDataPath = "http://www.garsonix.co.uk/temp/dddnorth2014.js";
+		private const String JsonCacheFileName = "agenda.json";
+		private static String _cacheFolder;
+
 
 		public static EventAgenda EventData { get; private set; }
 
-		public static Page GetMainPage ()
-		{	
+		public static Page GetMainPage (String cacheFolder)
+		{
+			_cacheFolder = cacheFolder;
 			InitEventData ();
 
 			var slotsPage = new CarouselPage {
@@ -96,17 +102,24 @@ namespace NogginAgenda
 		{
 			DateTime saveFileAge;
 
-			String json;
+			String json = null;
 
-			var rootFolder = FileSystem.Current.LocalStorage;
-			var folder = rootFolder.CreateFolderAsync("Caches", CreationCollisionOption.OpenIfExists).Result;
+			var folder = GetCacheFolder();
 
-			try{
-				var file = folder.GetFileAsync("agenda.json").Result;
-				json = file.ReadAllTextAsync().Result;
+			try
+			{
+				if(folder.CheckExistsAsync(JsonCacheFileName).Result == ExistenceCheckResult.NotFound)
+				{
+					throw new Exception("No file yet");
+				}
 
-				// Todo: Get saveFileAge from the file
-				saveFileAge = DateTime.Now.AddMinutes(-5);
+				var file = folder.GetFileAsync(JsonCacheFileName).Result;
+				var thing = file.Path.Split('/');
+
+				json = ReadFile(file).Result;
+				// Todo: throw exception if json is bad
+
+				saveFileAge = GetAgeFromJson(json);
 			}
 			catch(Exception) {
 				saveFileAge = DateTime.MinValue;
@@ -120,29 +133,79 @@ namespace NogginAgenda
 
 				if (response.IsSuccessStatusCode)
 				{
-					json = response.Content.ReadAsStringAsync ().Result;
+					json = response.Content.ReadAsStringAsync().Result;
+					SaveJsonFile (json);
 				}
 				else
 				{
 					switch (response.StatusCode)
 					{
 						case HttpStatusCode.NotModified:
-							json = "";
+							// Cached is newer. So just use this
 							break;
 						case HttpStatusCode.NotFound:
 							// Someone has moved the data, ask user to check for new version
-							json = "";
+							if(String.IsNullOrWhiteSpace(json))
+							{
+								throw new Exception("The data for this conference has moved. You may need to update this app.");	
+							}
+							// Show a warning saying the data has moved so this may not be up to date
+							// ?? page.DisplayAlert ??
 							break;
-					default:
-						throw new Exception ("Network issue, I should show you summat nice");
+						default:
+							if (String.IsNullOrWhiteSpace (json)) {
+							throw new Exception ("Network issue, I should show you summat nice");
+							}
+							// Todo: Show warning?: Data may be old
+							break;
 					}
-
 				}
-
-
 			}
 
 			return json;
+		}
+
+		private static IFolder GetCacheFolder()
+		{
+			if (_cacheFolder != null) {
+
+				var cacheFolder = FileSystem.Current.GetFolderFromPathAsync (_cacheFolder).Result;
+				return cacheFolder;
+			}
+
+			var rootFolder = FileSystem.Current.LocalStorage;
+			return rootFolder.CreateFolderAsync("Caches/AgendaApp", CreationCollisionOption.OpenIfExists).Result;
+		}
+
+		private static void SaveJsonFile(String json)
+		{
+			json = SetAgeOnJson(json, DateTime.Now);
+			var folder = GetCacheFolder();
+			var file = folder.CreateFileAsync (JsonCacheFileName, CreationCollisionOption.ReplaceExisting).Result;
+			file.WriteAllTextAsync(json).Wait();
+		}
+
+		private static DateTime GetAgeFromJson(String json)
+		{
+			var dateRegExp = new Regex ("\"createdDate\": \"(?<createdDate>.*?)\"");
+			var matches = dateRegExp.Match (json);
+			var createdDateMatch = matches.Groups ["createdDate"].Value;
+			var returnDate = DateTime.MinValue;
+			DateTime.TryParse (createdDateMatch, out returnDate);
+
+			return returnDate;
+		}
+
+		private static async Task<string> ReadFile(IFile f){
+			return await Task.Run(() => f.ReadAllTextAsync ()).ConfigureAwait(false);
+		}
+
+		private static String SetAgeOnJson(String json, DateTime age)
+		{
+			var regex = new Regex("(.*\"createdDate\":) \"([^\"]+)(\".*)");
+			var replace = String.Format("$1 \"{0:yyyy-MM-dd H:mm}$3", age);
+			var replaced = regex.Replace(json, replace);
+			return replaced;
 		}
 	}
 }
