@@ -3,8 +3,16 @@
 	xmlns="http://xamarin.com/schemas/2014/forms"
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 	x:Class="NogginAgenda.TalkDescriptionPage"
+	xmlns:converters="clr-namespace:NogginAgenda.Xaml.Converters;assembly=NogginAgenda"
 	Padding="10"
 	Title="{Binding TimeAndRoom}">
+
+	<ContentPage.Resources>
+    	<ResourceDictionary>
+        	<converters:UriConverter x:Key="uriConverter"/>>
+    	</ResourceDictionary>
+	</ContentPage.Resources>
+
 	<ContentPage.Content>
 		<Grid>
 			<Grid.RowDefinitions>
@@ -21,12 +29,12 @@
 				<Label Text="{Binding Speaker.Name}" Font="Micro" />
 			</StackLayout>
 
-			<Image Source="{Binding Speaker.PictureUrl}" WidthRequest="100" HeightRequest="100" VerticalOptions="Start" />
-			<!--<Image WidthRequest="100" HeightRequest="100" VerticalOptions="Start">
+			<!---<Image Source="{Binding Speaker.PictureUrl}" WidthRequest="100" HeightRequest="100" VerticalOptions="Start" /> -->
+			<Image WidthRequest="100" HeightRequest="100" VerticalOptions="Start">
     			<Image.Source>
-      				<UriImageSource Uri="{Binding Speaker.PictureUrl}" CacheValidity="5" />
+      				<UriImageSource Uri="{Binding Speaker.PictureUrl, Converter={StaticResource uriConverter}" CacheValidity="5" />
     			</Image.Source>
-  			</Image>-->
+  			</Image>
 
 			<ScrollView Grid.Row="1" Grid.ColumnSpan="2">
 				<StackLayout>
