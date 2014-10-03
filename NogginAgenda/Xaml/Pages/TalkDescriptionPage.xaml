@@ -3,6 +3,7 @@
 	xmlns="http://xamarin.com/schemas/2014/forms"
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 	x:Class="NogginAgenda.TalkDescriptionPage"
+	xmlns:local="clr-namespace:NogginAgenda.Xaml;assembly=NogginAgenda"
 	xmlns:converters="clr-namespace:NogginAgenda.Xaml.Converters;assembly=NogginAgenda"
 	Padding="10"
 	Title="{Binding TimeAndRoom}">
@@ -38,8 +39,9 @@
 
 			<ScrollView Grid.Row="1" Grid.ColumnSpan="2">
 				<StackLayout>
-					
 					<Label Text="{Binding Description}" Font="Small" />
+					<local:LinkButton Text="Website" Uri="{Binding Speaker.WebsiteUrl}" />
+					<local:LinkButton x:Name="TwitterLink" Text="Twitter" Uri="{Binding Speaker.TwitterUrl}" />
 				</StackLayout>
 
 			</ScrollView>

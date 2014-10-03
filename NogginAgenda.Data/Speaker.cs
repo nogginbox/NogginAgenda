@@ -9,6 +9,8 @@ namespace NogginAgenda.Data
 
 		public String PictureUrl { get; set; }
 
+        public String TwitterUrl { get; set; }
+
 		public String WebsiteUrl { get; set; }
 
 		public IList<Talk> Talks { get; set; }

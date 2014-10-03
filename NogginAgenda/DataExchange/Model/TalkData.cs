@@ -7,6 +7,7 @@ namespace NogginAgenda.DataExchange.Model
 	{
 		public String speakerlink {get;set;}
 		public String speakerimage { get; set; }
+        public String speakertwitter { get; set; }
 		public String speaker { get; set; }
 		public String description { get; set;}
 		public String title { get; set; }

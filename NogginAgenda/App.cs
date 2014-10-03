@@ -87,7 +87,8 @@ namespace NogginAgenda
 					{
 						Name = t.speaker,
 						PictureUrl = t.speakerimage,
-						WebsiteUrl = t.speakerlink
+						WebsiteUrl = t.speakerlink,
+                        TwitterUrl = String.IsNullOrEmpty(t.speakertwitter) ? null : String.Format("https://www.twitter.com/{0}",t.speakertwitter)
 					}
 				};
 

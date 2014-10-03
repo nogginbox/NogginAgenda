@@ -10,6 +10,12 @@ namespace NogginAgenda
 		{
 			InitializeComponent ();
 		}
+
+        protected override void OnAppearing ()
+        {
+            TwitterLink.IsVisible = !String.IsNullOrEmpty(TwitterLink.Uri);
+            base.OnAppearing ();
+        }
 	}
 }
 
