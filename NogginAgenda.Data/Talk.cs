@@ -12,13 +12,15 @@ namespace NogginAgenda.Data
 
 		public String Description { get; set; }
 
+        public String Room { get; set; }
+
 		public Speaker Speaker { get; set; }
 
 		public TimeSlot TimeSlot { get; set; }
 
 		public String TimeAndRoom
 		{
-			get {return String.Format ("{0} - room {1}", TimeSlot.ShortName, "TBA");} 
+			get {return String.Format ("{0} - Room {1}", TimeSlot.ShortName, Room);} 
 		}
 	}
 }

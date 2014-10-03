@@ -10,6 +10,7 @@ namespace NogginAgenda.DataExchange.Model
         public String speakertwitter { get; set; }
 		public String speaker { get; set; }
 		public String description { get; set;}
+        public String room { get; set; }
 		public String title { get; set; }
 
 		/// <summary>

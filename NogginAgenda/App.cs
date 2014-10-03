@@ -83,6 +83,7 @@ namespace NogginAgenda
 				{
 					Title = t.title,
 					Description = t.description,
+                    Room = t.room,
 					Speaker = new Speaker
 					{
 						Name = t.speaker,
@@ -109,6 +110,8 @@ namespace NogginAgenda
 				{
 					talk.TimeSlot = slot;
 				}
+
+                slot.Talks = slot.Talks.OrderBy (t => t.Room).ToList();
 			}
 
 			eventData.Slots = eventData.Slots.OrderBy (s => s.StartTime).ToList();

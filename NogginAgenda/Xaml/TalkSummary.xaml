@@ -29,6 +29,9 @@
     			</Image.Source>
   			</Image>
 
+  			<BoxView WidthRequest="10" HeightRequest="15" Color="White" HorizontalOptions="Start" VerticalOptions="Start" />
+  			<Label Text="{Binding Room}" Font="Micro" />
+
 			<StackLayout Grid.Column="1">
 				<Label Text="{Binding Title}" Font="Bold,Small" />
 				<Label Text="{Binding Speaker.Name}" Font="Micro" />
