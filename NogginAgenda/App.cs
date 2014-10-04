@@ -82,7 +82,7 @@ namespace NogginAgenda
 				var newTalk = new Talk
 				{
 					Title = t.title,
-					Description = t.description,
+                    Description = t.description,
                     Room = t.room,
 					Speaker = new Speaker
 					{
