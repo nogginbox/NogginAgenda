@@ -5,7 +5,6 @@ using System.Net;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using NogginAgenda.Data;
 using Xamarin.Forms;
 using NogginAgenda.DataExchange.Model;
@@ -23,7 +22,7 @@ namespace NogginAgenda
 
 		public static EventAgenda EventData { get; private set; }
 
-		public static Page GetMainPage (String cacheFolder)
+		public static Page GetMainPage (String cacheFolder = null)
 		{
 			_cacheFolder = cacheFolder;
 			InitEventData ();

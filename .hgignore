@@ -4,3 +4,7 @@ NogginAgenda.WinPhone/Bin/*
 NogginAgenda.WinPhone/obj/*
 NogginAgenda/obj/*
 NogginAgenda/bin/*
+Android/bin/*
+Android/obj/*
+iOS/bin/*
+iOS/obj/*

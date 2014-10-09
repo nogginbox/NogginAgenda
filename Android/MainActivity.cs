@@ -26,7 +26,7 @@ namespace NogginAgenda.Android
 
 			Xamarin.Forms.Forms.Init (this, bundle);
 
-			SetPage (App.GetMainPage (null));
+			SetPage (App.GetMainPage());
 		}
 	}
 }
