@@ -48,7 +48,11 @@ namespace NogginAgenda
 				}
 			};
 
-			return new NavigationPage(slotsPage);
+			return (Device.OS == TargetPlatform.WinPhone)
+                ? (Page) slotsPage
+                : new NavigationPage(slotsPage);
+
+			
 		}
 
 		private static async Task InitEventData()
