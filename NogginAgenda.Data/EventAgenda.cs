@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace NogginAgenda.Data
@@ -8,12 +9,12 @@ namespace NogginAgenda.Data
 	{
 		public EventAgenda()
 		{
-			Slots = new List<TimeSlot>();
+			Slots = new ObservableCollection<TimeSlot>();
 		}
 
 		public String EventName { get; set; }
 
-		public IList<TimeSlot> Slots { get; set; }
+		public ObservableCollection<TimeSlot> Slots { get; set; }
 
 		public IList<Talk> Talks
 		{

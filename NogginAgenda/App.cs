@@ -25,7 +25,7 @@ namespace NogginAgenda
 		public static Page GetMainPage (String cacheFolder = null)
 		{
 			_cacheFolder = cacheFolder;
-			InitEventData ();
+			InitEventData();
 
 			var slotsPage = new CarouselPage {
 				Title = "DDD North 2014",
@@ -51,30 +51,31 @@ namespace NogginAgenda
 			return new NavigationPage(slotsPage);
 		}
 
-		private static void InitEventData()
+		private static async Task InitEventData()
 		{
-			// Todo: Check if newer event data available online
-			// If newer: Download and cache
-			// If older: Load cached version
+			EventData = new EventAgenda();
 
 			try{
-				var json = GetJson();
+				var json = await GetJson();
 
 				// Now parse with JSON.Net
 				var jsonData = JsonConvert.DeserializeObject<DataHolder>(json);
 
-				EventData = CreateEventDataFromJsonData(jsonData.Data);
+				UpdateEventDataFromJsonData(EventData, jsonData.Data);
 			}
 			catch(Exception e) {
 				_errorMessage = e.Message;
 			}
 		}
 
-		private static EventAgenda CreateEventDataFromJsonData(IList<TalkData> talksJson)
+	    private static void InitPages()
+	    {
+	        
+	    }
+
+		private static void UpdateEventDataFromJsonData(EventAgenda eventData, IList<TalkData> talksJson)
 		{
-			var eventData = new EventAgenda {
-				EventName = "DDD North 2014"
-			};
+		    eventData.EventName = "DDD North 2014";
 
 			foreach (var t in talksJson)
 			{
@@ -113,12 +114,14 @@ namespace NogginAgenda
                 slot.Talks = slot.Talks.OrderBy (t => t.Room).ToList();
 			}
 
-			eventData.Slots = eventData.Slots.OrderBy (s => s.StartTime).ToList();
-
-			return eventData;
+		    foreach (var slot in eventData.Slots.OrderBy (s => s.StartTime))
+		    {
+		        eventData.Slots.Add(slot);
+		    }
+			
 		}
 
-		private static String GetJson()
+		private static async Task<String> GetJson()
 		{
 			DateTime saveFileAge;
 
@@ -128,13 +131,12 @@ namespace NogginAgenda
 
 			try
 			{
-				if(folder.CheckExistsAsync(JsonCacheFileName).Result == ExistenceCheckResult.NotFound)
+				if(! await FileExists(folder, JsonCacheFileName))
 				{
 					throw new Exception("No file yet");
 				}
 
-				var file = folder.GetFileAsync(JsonCacheFileName).Result;
-				var thing = file.Path.Split('/');
+				var file = await folder.GetFileAsync(JsonCacheFileName);
 
 				json = ReadFile(file).Result;
 				// Todo: throw exception if json is bad
@@ -147,14 +149,30 @@ namespace NogginAgenda
 
 			using (var client = new HttpClient ())
 			{
-				client.DefaultRequestHeaders.IfModifiedSince = saveFileAge;
+			    if (saveFileAge != DateTime.MinValue)
+			    {
+			        client.DefaultRequestHeaders.IfModifiedSince = saveFileAge;
+			    }
 
-				var response = client.GetAsync(RemoteDataPath).Result;
+			    HttpResponseMessage response;
+			    try
+			    {
+                    response = await client.GetAsync(RemoteDataPath);
+			    }
+			    catch (Exception e)
+			    {
+                    if (String.IsNullOrEmpty(json))
+                    {
+                        throw new Exception("We can't connect to the Internet right now to get the agenda.");
+                    }
+                    return json;
+			    }
+				
 
 				if (response.IsSuccessStatusCode)
 				{
 					json = response.Content.ReadAsStringAsync().Result;
-					SaveJsonFile (json);
+					await SaveJsonFile (json);
 				}
 				else
 				{
@@ -188,14 +206,14 @@ namespace NogginAgenda
 			}
 
 			var rootFolder = FileSystem.Current.LocalStorage;
-			return rootFolder.CreateFolderAsync("Caches/AgendaApp", CreationCollisionOption.OpenIfExists).Result;
+			return rootFolder.CreateFolderAsync("Caches", CreationCollisionOption.OpenIfExists).Result;
 		}
 
-		private static void SaveJsonFile(String json)
+		private static async Task SaveJsonFile(String json)
 		{
 			json = SetAgeOnJson(json, DateTime.Now);
 			var folder = GetCacheFolder();
-			var file = folder.CreateFileAsync (JsonCacheFileName, CreationCollisionOption.ReplaceExisting).Result;
+			var file = await folder.CreateFileAsync (JsonCacheFileName, CreationCollisionOption.ReplaceExisting);
 			file.WriteAllTextAsync(json).Wait();
 		}
 
@@ -213,6 +231,12 @@ namespace NogginAgenda
 		private static async Task<string> ReadFile(IFile f){
 			return await Task.Run(() => f.ReadAllTextAsync ()).ConfigureAwait(false);
 		}
+
+	    private static async Task<bool> FileExists(IFolder folder, String fileName)
+	    {
+	        var existStatus = await folder.CheckExistsAsync(fileName);
+	        return existStatus != ExistenceCheckResult.NotFound;
+	    }
 
 		private static String SetAgeOnJson(String json, DateTime age)
 		{
