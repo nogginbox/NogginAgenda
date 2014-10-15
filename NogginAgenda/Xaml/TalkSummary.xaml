@@ -9,6 +9,15 @@
 	<ContentPage.Resources>
     	<ResourceDictionary>
         	<converters:UriConverter x:Key="uriConverter"/>
+            <!-- Image caching bug so disable for now (http://forums.xamarin.com/discussion/22044/exception-with-long-image-uris) -->
+            <OnPlatform x:Key="cacheImagesOnPlatform" x:TypeArguments="x:Boolean"
+                iOS="true"
+                Android="false"
+                WinPhone="false" />
+          <OnPlatform x:Key="backgroundColourOnPlatorm" x:TypeArguments="Color"
+              iOS="White"
+              Android="Black"
+              WinPhone="Black" />
     	</ResourceDictionary>
 	</ContentPage.Resources>
 
@@ -25,20 +34,11 @@
 			<!--<Image Source="{Binding Speaker.PictureUrl}" WidthRequest="50" HeightRequest="50" VerticalOptions="Start" />-->
 			<Image WidthRequest="50" HeightRequest="50" VerticalOptions="Start">
     			<Image.Source>
-                    <UriImageSource Uri="{Binding Speaker.PictureUrl, Converter={StaticResource uriConverter}}" CacheValidity="5">
-                        <UriImageSource.CachingEnabled>
-                            <OnPlatform x:TypeArguments="x:Boolean">
-                                <OnPlatform.iOS>true</OnPlatform.iOS>
-                                <!-- Disabled due to bug http://forums.xamarin.com/discussion/22044/exception-with-long-image-uris -->
-                                <OnPlatform.Android>false</OnPlatform.Android>
-                                <OnPlatform.WinPhone>false</OnPlatform.WinPhone>
-                            </OnPlatform>
-                        </UriImageSource.CachingEnabled>
-                    </UriImageSource>
+                    <UriImageSource Uri="{Binding Speaker.PictureUrl, Converter={StaticResource uriConverter}}" CacheValidity="5" CachingEnabled="{StaticResource cacheImagesOnPlatform}" />
     			</Image.Source>
   			</Image>
 
-  			<BoxView WidthRequest="10" HeightRequest="15" Color="White" HorizontalOptions="Start" VerticalOptions="Start" />
+            <BoxView WidthRequest="15" HeightRequest="25" Color="{StaticResource backgroundColourOnPlatorm}" HorizontalOptions="Start" VerticalOptions="Start" />
   			<Label Text="{Binding Room}" Font="Micro" />
 
 			<StackLayout Grid.Column="1">

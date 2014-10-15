@@ -8,6 +8,19 @@
     <!--Application Resources-->
     <Application.Resources>
         <local:LocalizedStrings xmlns:local="clr-namespace:NogginAgenda.WinPhone" x:Key="LocalizedStrings"/>
+
+        <Style TargetType="phone:Pivot">
+            <Setter Property="Margin" Value="100"/>
+            <Setter Property="HeaderTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock Text="Test"/>
+                     </DataTemplate>
+                 </Setter.Value>
+            </Setter>
+        </Style>
+            
+            
     </Application.Resources>
 
     <Application.ApplicationLifetimeObjects>
@@ -18,3 +31,22 @@
     </Application.ApplicationLifetimeObjects>
 
 </Application>
+
+<!--
+
+
+<phone:Pivot Grid.Row="1">
+    <phone:Pivot.HeaderTemplate>
+        <DataTemplate>
+            <Grid Background="Red" Height="200">
+                <TextBlock Text="{Binding}"/>
+            </Grid>
+        </DataTemplate>
+    </phone:Pivot.HeaderTemplate>
+    <phone:PivotItem Header="Test">
+        <TextBlock Text="ghjgb"/>
+    </phone:PivotItem>
+    <phone:PivotItem Header="Test">
+        <TextBlock Text="ghjgb"/>
+    </phone:PivotItem>
+</phone:Pivot>-->

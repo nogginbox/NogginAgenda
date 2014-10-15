@@ -10,8 +10,13 @@
 
 	<ContentPage.Resources>
     	<ResourceDictionary>
-        	<converters:UriConverter x:Key="uriConverter"/>>
-    	</ResourceDictionary>
+        	<converters:UriConverter x:Key="uriConverter"/>
+            <!-- Image caching bug so disable for now (http://forums.xamarin.com/discussion/22044/exception-with-long-image-uris) -->
+            <OnPlatform x:Key="cacheImagesOnPlatform" x:TypeArguments="x:Boolean"
+                iOS="true"
+                Android="false"
+                WinPhone="false" />
+    	  </ResourceDictionary>
 	</ContentPage.Resources>
 
 	<ContentPage.Content>
@@ -33,16 +38,7 @@
 			<!---<Image Source="{Binding Speaker.PictureUrl}" WidthRequest="100" HeightRequest="100" VerticalOptions="Start" /> -->
 			<Image WidthRequest="100" HeightRequest="100" VerticalOptions="Start">
     			<Image.Source>
-                    <UriImageSource Uri="{Binding Speaker.PictureUrl, Converter={StaticResource uriConverter}" CacheValidity="5">
-                        <UriImageSource.CachingEnabled>
-                            <OnPlatform x:TypeArguments="x:Boolean">
-                                <OnPlatform.iOS>true</OnPlatform.iOS>
-                                <!-- Disabled due to bug http://forums.xamarin.com/discussion/22044/exception-with-long-image-uris -->
-                                <OnPlatform.Android>false</OnPlatform.Android>
-                                <OnPlatform.WinPhone>false</OnPlatform.WinPhone>
-                            </OnPlatform>
-                        </UriImageSource.CachingEnabled>
-                    </UriImageSource>
+                  <UriImageSource Uri="{Binding Speaker.PictureUrl, Converter={StaticResource uriConverter}}" CacheValidity="5" CachingEnabled="{StaticResource cacheImagesOnPlatform}" />
     			</Image.Source>
   			</Image>
 

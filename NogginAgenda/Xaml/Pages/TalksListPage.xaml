@@ -5,13 +5,21 @@
 	xmlns:noggin="clr-namespace:NogginAgenda;assembly=NogginAgenda"
 	x:Class="NogginAgenda.TalksListPage"
 	Padding="10">
+    <ContentPage.Resources>
+      <ResourceDictionary>
+        <OnPlatform x:Key="rowHeightOnPlatform" x:TypeArguments="x:Int32"
+            iOS="80"
+            Android="80"
+            WinPhone="120" />
+      </ResourceDictionary>
+    </ContentPage.Resources>
 	<ContentPage.Content>
 		<StackLayout>
 			<Label Text="{Binding ShortName}" Font="Large" XAlign="Center" />
 			<ListView x:Name="TalksList"
 				ItemsSource="{Binding Talks}"
 				ItemSelected="OnTalkSelected"
-				RowHeight="80">
+				RowHeight="{StaticResource rowHeightOnPlatform}">
 				<ListView.ItemTemplate>
 					<DataTemplate>
 						<ViewCell>

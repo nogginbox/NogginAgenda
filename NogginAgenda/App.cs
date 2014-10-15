@@ -77,9 +77,11 @@ namespace NogginAgenda
 	        
 	    }
 
-		private static void UpdateEventDataFromJsonData(EventAgenda eventData, IList<TalkData> talksJson)
+		private static void UpdateEventDataFromJsonData(EventAgenda eventData, IEnumerable<TalkData> talksJson)
 		{
 		    eventData.EventName = "DDD North 2014";
+
+		    var slots = new List<TimeSlot>();
 
 			foreach (var t in talksJson)
 			{
@@ -98,17 +100,17 @@ namespace NogginAgenda
 				};
 
 				var newSlot = new TimeSlot(t.slot);
-				var existingSlot = eventData.Slots.FirstOrDefault (s => newSlot.Equals(s));
+				var existingSlot = slots.FirstOrDefault (s => newSlot.Equals(s));
 
 				if (existingSlot == null) {
-					eventData.Slots.Add(newSlot);
+					slots.Add(newSlot);
 				}
 
 				(existingSlot ?? newSlot).Talks.Add (newTalk);
 			}
 				
 			// Link up timeslots
-			foreach (var slot in eventData.Slots)
+			foreach (var slot in slots)
 			{
 				foreach (var talk in slot.Talks)
 				{
@@ -118,7 +120,7 @@ namespace NogginAgenda
                 slot.Talks = slot.Talks.OrderBy (t => t.Room).ToList();
 			}
 
-		    foreach (var slot in eventData.Slots.OrderBy (s => s.StartTime))
+		    foreach (var slot in slots.OrderBy (s => s.StartTime))
 		    {
 		        eventData.Slots.Add(slot);
 		    }
