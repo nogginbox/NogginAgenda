@@ -9,7 +9,7 @@
     <Application.Resources>
         <local:LocalizedStrings xmlns:local="clr-namespace:NogginAgenda.WinPhone" x:Key="LocalizedStrings"/>
 
-        <Style TargetType="phone:Pivot">
+        <!--<Style TargetType="phone:Pivot">
             <Setter Property="Margin" Value="100"/>
             <Setter Property="HeaderTemplate">
                 <Setter.Value>
@@ -18,7 +18,7 @@
                      </DataTemplate>
                  </Setter.Value>
             </Setter>
-        </Style>
+        </Style>-->
             
             
     </Application.Resources>
