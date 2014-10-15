@@ -26,7 +26,7 @@
     <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
     <NuGetPackageImportStamp>6295b84d</NuGetPackageImportStamp>
     <TargetFrameworkProfile />
-    <DefaultLanguage>en-US</DefaultLanguage>
+    <DefaultLanguage>en-GB</DefaultLanguage>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

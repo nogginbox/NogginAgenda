@@ -120,11 +120,11 @@ namespace NogginAgenda
                 slot.Talks = slot.Talks.OrderBy (t => t.Room).ToList();
 			}
 
+            // Add slots to eventData
 		    foreach (var slot in slots.OrderBy (s => s.StartTime))
 		    {
 		        eventData.Slots.Add(slot);
 		    }
-			
 		}
 
 		private static async Task<String> GetJson()

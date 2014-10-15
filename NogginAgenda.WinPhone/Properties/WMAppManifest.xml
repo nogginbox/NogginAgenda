@@ -1,7 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2014/deployment" AppPlatformVersion="8.1">
   <DefaultLanguage xmlns="" code="en-US" />
-  <App xmlns="" ProductID="{83a7fd1e-7523-499c-9ab1-95c4c915288e}" Title="NogginAgenda.WinPhone" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="NogginAgenda.WinPhone author" Description="Sample description" Publisher="NogginAgenda.WinPhone" PublisherID="{dab6d30c-c4b9-43bf-8853-e12b21a9c260}">
+  <App xmlns="" ProductID="{83a7fd1e-7523-499c-9ab1-95c4c915288e}"
+       Title="DDD North" RuntimeType="Silverlight"
+       Version="1.0.0.0" Genre="apps.normal"
+       Author="Garsonix"
+       Description="Sample description"
+       Publisher="NogginAgenda.WinPhone"
+       PublisherID="{dab6d30c-c4b9-43bf-8853-e12b21a9c260}">
     <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING" />
@@ -19,7 +25,7 @@
           <SmallImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileSmall.png</SmallImageURI>
           <Count>0</Count>
           <BackgroundImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileMedium.png</BackgroundImageURI>
-          <Title>NogginAgenda.WinPhone</Title>
+          <Title></Title>
           <BackContent></BackContent>
           <BackBackgroundImageURI></BackBackgroundImageURI>
           <BackTitle></BackTitle>
