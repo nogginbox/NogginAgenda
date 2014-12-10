@@ -19,38 +19,37 @@
     	  </ResourceDictionary>
 	</ContentPage.Resources>
 
-	<ContentPage.Content>
-		<Grid>
-			<Grid.RowDefinitions>
-				<RowDefinition Height="80" />
-				<RowDefinition Height="*" />
-			</Grid.RowDefinitions>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="60" />
-				<ColumnDefinition Width="*" />
-			</Grid.ColumnDefinitions>
-				
-			<StackLayout Grid.Column="1">
-				<Label Text="{Binding Title}" Font="Bold,Small" />
-				<Label Text="{Binding Speaker.Name}" Font="Micro" />
+
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="80" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="60" />
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
+			
+		<StackLayout Grid.Column="1">
+			<Label Text="{Binding Title}" Font="Bold,Small" />
+			<Label Text="{Binding Speaker.Name}" Font="Micro" />
+		</StackLayout>
+
+		<!---<Image Source="{Binding Speaker.PictureUrl}" WidthRequest="100" HeightRequest="100" VerticalOptions="Start" /> -->
+		<Image WidthRequest="100" HeightRequest="100" VerticalOptions="Start">
+			<Image.Source>
+              <UriImageSource Uri="{Binding Speaker.PictureUrl, Converter={StaticResource uriConverter}}" CacheValidity="5" CachingEnabled="{StaticResource cacheImagesOnPlatform}" />
+			</Image.Source>
+		</Image>
+
+		<ScrollView Grid.Row="1" Grid.ColumnSpan="2">
+			<StackLayout>
+				<Label Text="{Binding Description}" Font="Small" />
+				<local:LinkButton Text="Website" Uri="{Binding Speaker.WebsiteUrl}" />
+				<local:LinkButton x:Name="TwitterLink" Text="Twitter" Uri="{Binding Speaker.TwitterUrl}" />
 			</StackLayout>
 
-			<!---<Image Source="{Binding Speaker.PictureUrl}" WidthRequest="100" HeightRequest="100" VerticalOptions="Start" /> -->
-			<Image WidthRequest="100" HeightRequest="100" VerticalOptions="Start">
-    			<Image.Source>
-                  <UriImageSource Uri="{Binding Speaker.PictureUrl, Converter={StaticResource uriConverter}}" CacheValidity="5" CachingEnabled="{StaticResource cacheImagesOnPlatform}" />
-    			</Image.Source>
-  			</Image>
+		</ScrollView>
+	</Grid>
 
-			<ScrollView Grid.Row="1" Grid.ColumnSpan="2">
-				<StackLayout>
-					<Label Text="{Binding Description}" Font="Small" />
-					<local:LinkButton Text="Website" Uri="{Binding Speaker.WebsiteUrl}" />
-					<local:LinkButton x:Name="TwitterLink" Text="Twitter" Uri="{Binding Speaker.TwitterUrl}" />
-				</StackLayout>
-
-			</ScrollView>
-		</Grid>
-
-	</ContentPage.Content>
 </ContentPage>

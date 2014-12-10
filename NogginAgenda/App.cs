@@ -22,43 +22,34 @@ namespace NogginAgenda
 
 		public static EventAgenda EventData { get; private set; }
 
+        static App()
+        {
+            EventData = new EventAgenda ();
+        }
+
+
 		public static Page GetMainPage (String cacheFolder = null)
 		{
 			_cacheFolder = cacheFolder;
-			InitEventData();
+            var slotsPage = new CarouselPage();
+            slotsPage.Appearing += OnSlotsPageAppearing;
 
-			var slotsPage = new CarouselPage {
-				Title = "DDD North 2014",
-				ItemsSource = (EventData != null) ? EventData.Slots : null,
-				ItemTemplate =  new DataTemplate(() =>
-				{
-					return new TalksListPage();
-				})
-			};
-
-			slotsPage.Appearing += (object sender, EventArgs e) => {
-				if(!String.IsNullOrEmpty(_errorMessage))
-				{
-					var errorTitle = (EventData == null)
-						? "Error"
-						: "Warning";
-
-					(sender as Page).DisplayAlert(errorTitle, _errorMessage, "OK");
-					// Todo: can cancel when no data close the app
-				}
-			};
-
-			return (Device.OS == TargetPlatform.WinPhone)
-                ? (Page) slotsPage
-                : new NavigationPage(slotsPage);
-
-			
+            return new NavigationPage(
+                slotsPage
+            );
 		}
 
-		private static async Task InitEventData()
-		{
-			EventData = new EventAgenda();
+        protected static void OnSlotsPageAppearing(object sender, EventArgs args)
+        {
+            // Show loading page as model.
+            // Loading page will pop itself once data is loaded
+            var page = sender as CarouselPage;
+            page.Navigation.PushModalAsync (new LoadingPage(page));
+            page.Appearing -= OnSlotsPageAppearing;
+        }
 
+		public static async Task InitEventData()
+		{
 			try{
 				var json = await GetJson();
 
@@ -71,11 +62,6 @@ namespace NogginAgenda
 				_errorMessage = e.Message;
 			}
 		}
-
-	    private static void InitPages()
-	    {
-	        
-	    }
 
 		private static void UpdateEventDataFromJsonData(EventAgenda eventData, IEnumerable<TalkData> talksJson)
 		{

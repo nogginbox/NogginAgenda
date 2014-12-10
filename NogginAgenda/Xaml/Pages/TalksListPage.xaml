@@ -13,22 +13,21 @@
             WinPhone="120" />
       </ResourceDictionary>
     </ContentPage.Resources>
-	<ContentPage.Content>
-		<StackLayout>
-			<Label Text="{Binding ShortName}" Font="Large" XAlign="Center" />
-			<ListView x:Name="TalksList"
-				ItemsSource="{Binding Talks}"
-				ItemSelected="OnTalkSelected"
-				RowHeight="{StaticResource rowHeightOnPlatform}">
-				<ListView.ItemTemplate>
-					<DataTemplate>
-						<ViewCell>
-							<noggin:TalkSummary />
-						</ViewCell>
-					</DataTemplate>
-				</ListView.ItemTemplate>
-			</ListView>
-		</StackLayout>
 
-	</ContentPage.Content>
+	<StackLayout>
+		<Label Text="{Binding ShortName}" Font="Large" XAlign="Center" />
+		<ListView x:Name="TalksList"
+			ItemsSource="{Binding Talks}"
+			ItemSelected="OnTalkSelected"
+			RowHeight="{StaticResource rowHeightOnPlatform}">
+			<ListView.ItemTemplate>
+				<DataTemplate>
+					<ViewCell>
+						<noggin:TalkSummary />
+					</ViewCell>
+				</DataTemplate>
+			</ListView.ItemTemplate>
+		</ListView>
+	</StackLayout>
+
 </ContentPage>

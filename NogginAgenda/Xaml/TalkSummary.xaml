@@ -21,31 +21,31 @@
     	</ResourceDictionary>
 	</ContentPage.Resources>
 
-	<ContentView.Content>
-		<Grid>
-			<Grid.RowDefinitions>
-				<RowDefinition Height="*" />
-			</Grid.RowDefinitions>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="50" />
-				<ColumnDefinition Width="*" />
-			</Grid.ColumnDefinitions>
 
-			<!--<Image Source="{Binding Speaker.PictureUrl}" WidthRequest="50" HeightRequest="50" VerticalOptions="Start" />-->
-			<Image WidthRequest="50" HeightRequest="50" VerticalOptions="Start">
-    			<Image.Source>
-                    <UriImageSource Uri="{Binding Speaker.PictureUrl, Converter={StaticResource uriConverter}}" CacheValidity="5" CachingEnabled="{StaticResource cacheImagesOnPlatform}" />
-    			</Image.Source>
-  			</Image>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="50" />
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
 
-            <BoxView WidthRequest="15" HeightRequest="25" Color="{StaticResource backgroundColourOnPlatorm}" HorizontalOptions="Start" VerticalOptions="Start" />
-  			<Label Text="{Binding Room}" Font="Micro" />
+		<!--<Image Source="{Binding Speaker.PictureUrl}" WidthRequest="50" HeightRequest="50" VerticalOptions="Start" />-->
+		<Image WidthRequest="50" HeightRequest="50" VerticalOptions="Start">
+			<Image.Source>
+                <UriImageSource Uri="{Binding Speaker.PictureUrl, Converter={StaticResource uriConverter}}" CacheValidity="5" CachingEnabled="{StaticResource cacheImagesOnPlatform}" />
+			</Image.Source>
+		</Image>
 
-			<StackLayout Grid.Column="1">
-				<Label Text="{Binding Title}" Font="Bold,Small" />
-				<Label Text="{Binding Speaker.Name}" Font="Micro" />
-			</StackLayout>
+        <BoxView WidthRequest="15" HeightRequest="25" Color="{StaticResource backgroundColourOnPlatorm}" HorizontalOptions="Start" VerticalOptions="Start" />
+		<Label Text="{Binding Room}" Font="Micro" />
 
-		</Grid>
-	</ContentView.Content>
+		<StackLayout Grid.Column="1">
+			<Label Text="{Binding Title}" Font="Bold,Small" />
+			<Label Text="{Binding Speaker.Name}" Font="Micro" />
+		</StackLayout>
+
+	</Grid>
+
 </ContentView>
