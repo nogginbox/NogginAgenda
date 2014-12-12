@@ -178,13 +178,13 @@
     <Reference Include="Microsoft.Phone.Controls.Toolkit">
       <HintPath>..\packages\WPtoolkit.4.2013.08.16\lib\wp8\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
     </Reference>
-    <Reference Include="PCLStorage, Version=0.9.6.0, Culture=neutral, PublicKeyToken=286fe515a2c35b64, processorArchitecture=MSIL">
+    <Reference Include="PCLStorage, Version=1.0.0.0, Culture=neutral, PublicKeyToken=286fe515a2c35b64, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\PCLStorage.0.9.6\lib\wp8\PCLStorage.dll</HintPath>
+      <HintPath>..\packages\PCLStorage.1.0.0\lib\wp8\PCLStorage.dll</HintPath>
     </Reference>
-    <Reference Include="PCLStorage.Abstractions, Version=0.9.6.0, Culture=neutral, PublicKeyToken=286fe515a2c35b64, processorArchitecture=MSIL">
+    <Reference Include="PCLStorage.Abstractions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=286fe515a2c35b64, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\PCLStorage.0.9.6\lib\wp8\PCLStorage.Abstractions.dll</HintPath>
+      <HintPath>..\packages\PCLStorage.1.0.0\lib\wp8\PCLStorage.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http, Version=1.5.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
