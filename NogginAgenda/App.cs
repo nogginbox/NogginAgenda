@@ -20,6 +20,8 @@ namespace NogginAgenda
 		private static String _cacheFolder;
 		private static String _errorMessage = "";
 
+        private static CarouselPage _slotsPage;
+
 		public static EventAgenda EventData { get; private set; }
 
         static App()
@@ -31,21 +33,22 @@ namespace NogginAgenda
 		public static Page GetMainPage (String cacheFolder = null)
 		{
 			_cacheFolder = cacheFolder;
-            var slotsPage = new CarouselPage();
-            slotsPage.Appearing += OnSlotsPageAppearing;
+            _slotsPage = new CarouselPage();
 
-            return new NavigationPage(
-                slotsPage
+            var navPage = new NavigationPage(
+                _slotsPage
             );
+            navPage.Appearing += OnSlotsPageAppearing;
+
+            return navPage;
 		}
 
         protected static void OnSlotsPageAppearing(object sender, EventArgs args)
         {
             // Show loading page as model.
             // Loading page will pop itself once data is loaded
-            var page = sender as CarouselPage;
-            page.Navigation.PushModalAsync (new LoadingPage(page));
-            page.Appearing -= OnSlotsPageAppearing;
+            _slotsPage.Navigation.PushModalAsync (new LoadingPage(page));
+            _slotsPage.Appearing -= OnSlotsPageAppearing;
         }
 
 		public static async Task InitEventData()
@@ -149,6 +152,7 @@ namespace NogginAgenda
 			    HttpResponseMessage response;
 			    try
 			    {
+                    // This is failing on Android
                     response = await client.GetAsync(RemoteDataPath);
 			    }
 			    catch (Exception e)
