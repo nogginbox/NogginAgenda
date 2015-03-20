@@ -198,9 +198,6 @@ Global
 		{83A7FD1E-7523-499C-9AB1-95C4C915288E}.Release|x86.Build.0 = Release|x86
 		{83A7FD1E-7523-499C-9AB1-95C4C915288E}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
-	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = Android\NogginAgenda.Android.csproj
-	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
