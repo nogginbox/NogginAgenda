@@ -2,8 +2,9 @@
 <ContentView
 	xmlns="http://xamarin.com/schemas/2014/forms"
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-	x:Class="NogginAgenda.TalkSummary"
+	xmlns:c="clr-namespace:NogginAgenda.CustomControls;assembly=NogginAgenda"
 	xmlns:converters="clr-namespace:NogginAgenda.Xaml.Converters;assembly=NogginAgenda"
+	x:Class="NogginAgenda.TalkSummary"
 	Padding="0,10">
 
 	<ContentPage.Resources>
@@ -32,11 +33,11 @@
 		</Grid.ColumnDefinitions>
 
 		<!--<Image Source="{Binding Speaker.PictureUrl}" WidthRequest="50" HeightRequest="50" VerticalOptions="Start" />-->
-		<Image WidthRequest="50" HeightRequest="50" VerticalOptions="Start">
-			<Image.Source>
+		<c:CircleImage WidthRequest="50" HeightRequest="50" VerticalOptions="Start">
+			<c:CircleImage.Source>
                 <UriImageSource Uri="{Binding Speaker.PictureUrl, Converter={StaticResource uriConverter}}" CacheValidity="5" CachingEnabled="{StaticResource cacheImagesOnPlatform}" />
-			</Image.Source>
-		</Image>
+			</c:CircleImage.Source>
+		</c:CircleImage>
 
         <BoxView WidthRequest="15" HeightRequest="25" Color="{StaticResource backgroundColourOnPlatorm}" HorizontalOptions="Start" VerticalOptions="Start" />
 		<Label Text="{Binding Room}" Font="Micro" />
