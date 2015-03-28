@@ -2,49 +2,46 @@
 <ContentPage
 	xmlns="http://xamarin.com/schemas/2014/forms"
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-	x:Class="NogginAgenda.TalkDescriptionPage"
 	xmlns:c="clr-namespace:NogginAgenda.CustomControls;assembly=NogginAgenda"
+	xmlns:local="clr-namespace:NogginAgenda;assembly=NogginAgenda"
+	x:Class="NogginAgenda.TalkDescriptionPage"
 	xmlns:converters="clr-namespace:NogginAgenda.Xaml.Converters;assembly=NogginAgenda"
-	Padding="10"
 	Title="{Binding TimeAndRoom}">
 
 	<ContentPage.Resources>
     	<ResourceDictionary>
         	<converters:UriConverter x:Key="uriConverter"/>
-            <!-- Image caching bug so disable for now (http://forums.xamarin.com/discussion/22044/exception-with-long-image-uris) -->
-            <OnPlatform x:Key="cacheImagesOnPlatform" x:TypeArguments="x:Boolean"
-                iOS="true"
-                Android="false"
-                WinPhone="false" />
     	  </ResourceDictionary>
 	</ContentPage.Resources>
 
 
 	<Grid>
 		<Grid.RowDefinitions>
-			<RowDefinition Height="80" />
+			<RowDefinition Height="130" />
 			<RowDefinition Height="*" />
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="80" />
+			<ColumnDefinition Width="100" />
 			<ColumnDefinition Width="*" />
 		</Grid.ColumnDefinitions>
+
+		<BoxView Color="{x:Static local:AppConstants.ForegroundThemeColor}" Grid.ColumnSpan="2" HeightRequest="100" VerticalOptions="Start" />
 			
-		<StackLayout Grid.Column="1">
-			<Label Text="{Binding Title}" Font="Bold,Small" />
-			<Label Text="{Binding Subtitle}" Font="Bold,Micro" />
-			<Label Text="{Binding Speaker.Name}" Font="Micro" />
+		<StackLayout Grid.Column="1" Padding="0,10,10,10">
+			<Label Text="{Binding Title}" Font="Bold,Small" TextColor="White" />
+			<Label Text="{Binding Subtitle}" Font="Bold,Micro" TextColor="White" />
+			<Label Text="{Binding Speaker.Name}" Font="Micro" TextColor="White" XAlign="End" />
 		</StackLayout>
 
 		<!---<Image Source="{Binding Speaker.PictureUrl}" WidthRequest="100" HeightRequest="100" VerticalOptions="Start" /> -->
-		<c:CircleImage WidthRequest="80" HeightRequest="80" VerticalOptions="Start">
+		<c:CircleImage WidthRequest="80" HeightRequest="80" VerticalOptions="End" HorizontalOptions="Center">
 			<c:CircleImage.Source>
-              <UriImageSource Uri="{Binding Speaker.PictureUrl, Converter={StaticResource uriConverter}}" CacheValidity="5" CachingEnabled="{StaticResource cacheImagesOnPlatform}" />
+              <UriImageSource Uri="{Binding Speaker.PictureUrl, Converter={StaticResource uriConverter}}" CacheValidity="5" CachingEnabled="{x:Static local:AppConstants.CacheImagesEnabled}" />
 			</c:CircleImage.Source>
 		</c:CircleImage>
 
 		<ScrollView Grid.Row="1" Grid.ColumnSpan="2">
-			<StackLayout>
+			<StackLayout Padding="10">
 				<Label Text="{Binding Description}" Font="Small" />
 				<c:LinkButton Text="Website" Uri="{Binding Speaker.WebsiteUrl}" />
 				<c:LinkButton x:Name="TwitterLink" Text="Twitter" Uri="{Binding Speaker.TwitterUrl}" />

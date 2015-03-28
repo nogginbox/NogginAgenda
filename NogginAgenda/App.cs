@@ -38,6 +38,7 @@ namespace NogginAgenda
             _nav = new NavigationPage(
                 _slotsPage
             );
+            _nav.BarTextColor = AppConstants.ForegroundThemeColor;
             _nav.Appearing += OnSlotsPageAppearing;
 
             return _nav;
