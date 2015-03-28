@@ -154,8 +154,9 @@ namespace NogginAgenda
 			    HttpResponseMessage response;
 			    try
 			    {
-                    // This is failing on Android
-                    response = await client.GetAsync(RemoteDataPath);
+                    // Losing benefit of async - but fails on Android without it
+                    var a = client.GetAsync(RemoteDataPath);
+                    response = a.GetAwaiter().GetResult();
 			    }
 			    catch (Exception e)
 			    {
