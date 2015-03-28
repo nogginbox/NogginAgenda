@@ -13,13 +13,14 @@ using System.Threading.Tasks;
 
 namespace NogginAgenda
 {
-	public class App
+    public class App : Xamarin.Forms.Application
 	{
 		private const String RemoteDataPath = "http://www.garsonix.co.uk/temp/dddnorth2014.js";
 		private const String JsonCacheFileName = "agenda.json";
 		private static String _cacheFolder;
 		private static String _errorMessage = "";
 
+        private static NavigationPage _nav;
         private static CarouselPage _slotsPage;
 
 		public static EventAgenda EventData { get; private set; }
@@ -29,26 +30,26 @@ namespace NogginAgenda
             EventData = new EventAgenda ();
         }
 
-
 		public static Page GetMainPage (String cacheFolder = null)
 		{
 			_cacheFolder = cacheFolder;
             _slotsPage = new CarouselPage();
 
-            var navPage = new NavigationPage(
+            _nav = new NavigationPage(
                 _slotsPage
             );
-            navPage.Appearing += OnSlotsPageAppearing;
+            _nav.Appearing += OnSlotsPageAppearing;
 
-            return navPage;
+            return _nav;
 		}
 
         protected static void OnSlotsPageAppearing(object sender, EventArgs args)
         {
             // Show loading page as model.
             // Loading page will pop itself once data is loaded
-            _slotsPage.Navigation.PushModalAsync (new LoadingPage(page));
-            _slotsPage.Appearing -= OnSlotsPageAppearing;
+            //var page = sender as CarouselPage;
+            _slotsPage.Navigation.PushModalAsync (new LoadingPage(_slotsPage));
+            _nav.Appearing -= OnSlotsPageAppearing;
         }
 
 		public static async Task InitEventData()
@@ -77,6 +78,7 @@ namespace NogginAgenda
 				var newTalk = new Talk
 				{
 					Title = t.title,
+                    Subtitle = t.subtitle,
                     Description = t.description,
                     Room = t.room,
 					Speaker = new Speaker

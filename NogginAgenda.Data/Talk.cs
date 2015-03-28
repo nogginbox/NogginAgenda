@@ -10,6 +10,8 @@ namespace NogginAgenda.Data
 	{
 		public String Title { get; set; }
 
+        public String Subtitle { get; set; }
+
 		public String Description { get; set; }
 
         public String Room { get; set; }

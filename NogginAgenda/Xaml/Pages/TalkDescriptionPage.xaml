@@ -32,6 +32,7 @@
 			
 		<StackLayout Grid.Column="1">
 			<Label Text="{Binding Title}" Font="Bold,Small" />
+			<Label Text="{Binding Subtitle}" Font="Bold,Micro" />
 			<Label Text="{Binding Speaker.Name}" Font="Micro" />
 		</StackLayout>
 

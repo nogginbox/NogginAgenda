@@ -12,6 +12,7 @@ namespace NogginAgenda.DataExchange.Model
 		public String description { get; set;}
         public String room { get; set; }
 		public String title { get; set; }
+        public String subtitle { get; set; }
 
 		/// <summary>
 		/// Format: yyyy-mm-dd h:mm,yyyy-mm-dd h:mm
