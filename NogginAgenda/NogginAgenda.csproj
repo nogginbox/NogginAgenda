@@ -44,7 +44,6 @@
     <Compile Include="DataExchange\Model\DataHolder.cs" />
     <Compile Include="DataExchange\Model\TalkData.cs" />
     <Compile Include="Xaml\Converters\UriConverter.cs" />
-    <Compile Include="Xaml\LinkButton.cs" />
     <Compile Include="Xaml\Pages\LoadingPage.xaml.cs">
       <DependentUpon>LoadingPage.xaml</DependentUpon>
     </Compile>
@@ -52,6 +51,11 @@
       <DependentUpon>TestPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="CustomControls\CircleImage.cs" />
+    <Compile Include="CustomControls\LinkButton.cs" />
+    <Compile Include="Xaml\ImageWithLabel.xaml.cs">
+      <DependentUpon>ImageWithLabel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AppConstants.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
@@ -113,6 +117,9 @@
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="Xaml\Pages\TestPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Xaml\ImageWithLabel.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

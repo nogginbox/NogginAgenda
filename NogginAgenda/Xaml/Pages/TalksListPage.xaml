@@ -4,7 +4,7 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 	xmlns:noggin="clr-namespace:NogginAgenda;assembly=NogginAgenda"
 	x:Class="NogginAgenda.TalksListPage"
-	Padding="10">
+	Padding="0,10">
     <ContentPage.Resources>
       <ResourceDictionary>
         <OnPlatform x:Key="rowHeightOnPlatform" x:TypeArguments="x:Int32"

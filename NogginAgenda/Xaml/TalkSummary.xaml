@@ -1,8 +1,10 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentView
 	xmlns="http://xamarin.com/schemas/2014/forms"
-	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 	xmlns:c="clr-namespace:NogginAgenda.CustomControls;assembly=NogginAgenda"
+	xmlns:local="clr-namespace:NogginAgenda;assembly=NogginAgenda"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	xmlns:xaml="clr-namespace:NogginAgenda.Xaml;assembly=NogginAgenda"
 	xmlns:converters="clr-namespace:NogginAgenda.Xaml.Converters;assembly=NogginAgenda"
 	x:Class="NogginAgenda.TalkSummary"
 	Padding="0,10">
@@ -10,37 +12,27 @@
 	<ContentPage.Resources>
     	<ResourceDictionary>
         	<converters:UriConverter x:Key="uriConverter"/>
-            <!-- Image caching bug so disable for now (http://forums.xamarin.com/discussion/22044/exception-with-long-image-uris) -->
-            <OnPlatform x:Key="cacheImagesOnPlatform" x:TypeArguments="x:Boolean"
-                iOS="true"
-                Android="false"
-                WinPhone="false" />
-          <OnPlatform x:Key="backgroundColourOnPlatorm" x:TypeArguments="Color"
-              iOS="White"
-              Android="Black"
-              WinPhone="Black" />
     	</ResourceDictionary>
 	</ContentPage.Resources>
 
 
-	<Grid>
+	<Grid Padding="10,0">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="*" />
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="50" />
+			<ColumnDefinition Width="70" />
 			<ColumnDefinition Width="*" />
 		</Grid.ColumnDefinitions>
 
-		<!--<Image Source="{Binding Speaker.PictureUrl}" WidthRequest="50" HeightRequest="50" VerticalOptions="Start" />-->
-		<c:CircleImage WidthRequest="50" HeightRequest="50" VerticalOptions="Start">
-			<c:CircleImage.Source>
-                <UriImageSource Uri="{Binding Speaker.PictureUrl, Converter={StaticResource uriConverter}}" CacheValidity="5" CachingEnabled="{StaticResource cacheImagesOnPlatform}" />
-			</c:CircleImage.Source>
-		</c:CircleImage>
-
-        <BoxView WidthRequest="15" HeightRequest="25" Color="{StaticResource backgroundColourOnPlatorm}" HorizontalOptions="Start" VerticalOptions="Start" />
-		<Label Text="{Binding Room}" Font="Micro" />
+        <xaml:ImageWithLabel
+        	Label="{Binding Room}"
+        	Source="{Binding Speaker.PictureUrl, Converter={StaticResource uriConverter}}"
+        	WidthRequest="60"
+        	HeightRequest="60"
+        	VerticalOptions="Start"
+        	HorizontalOptions="Start"
+        	LabelBackgroundColor="{x:Static local:AppConstants.ForegroundThemeColor}" />
 
 		<StackLayout Grid.Column="1">
 			<Label Text="{Binding Title}" Font="Bold,Small" />

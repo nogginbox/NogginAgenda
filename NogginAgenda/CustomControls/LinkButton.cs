@@ -1,7 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 
-namespace NogginAgenda.Xaml
+namespace NogginAgenda.CustomControls
 {
     public class LinkButton : Button
     {

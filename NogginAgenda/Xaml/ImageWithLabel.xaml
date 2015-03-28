@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView
+	xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	xmlns:c="clr-namespace:NogginAgenda.CustomControls;assembly=NogginAgenda"
+	xmlns:local="clr-namespace:NogginAgenda;assembly=NogginAgenda"
+	x:Class="NogginAgenda.Xaml.ImageWithLabel"
+	x:Name="ImageWithLabelContentView">
+
+	<Grid BindingContext="{x:Reference Name=ImageWithLabelContentView}">
+		<!---<Image Source="{Binding Speaker.PictureUrl}" WidthRequest="50" HeightRequest="50" VerticalOptions="Start" /> -->
+		<c:CircleImage WidthRequest="{Binding Width}" HeightRequest="{Binding Height}" VerticalOptions="Start" HorizontalOptions="Start">
+			<c:CircleImage.Source>
+	          <UriImageSource Uri="{Binding Source}" CacheValidity="5" CachingEnabled="{x:Static local:AppConstants.CacheImagesEnabled}" />
+			</c:CircleImage.Source>
+		</c:CircleImage>
+
+		<BoxView WidthRequest="20" HeightRequest="20" Color="{Binding LabelBackgroundColor}" HorizontalOptions="End" VerticalOptions="End" />
+		<Label Text="{Binding Label}" Font="Micro" TextColor="White" XAlign="Center" YAlign="Center" WidthRequest="20" HeightRequest="20" HorizontalOptions="End" VerticalOptions="End" />
+		
+	</Grid>
+
+</ContentView>

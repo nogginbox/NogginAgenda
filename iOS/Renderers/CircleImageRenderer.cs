@@ -21,7 +21,9 @@ namespace NogginAgenda.iOS.Renderers
 
             SetImageCornerRadius();
             Control.Layer.MasksToBounds = true;
-            Control.Layer.BorderColor = new CGColor (1f, 0.9f, 1f);
+            // Todo: Add Border Colour as element property
+            var c = AppConstants.ForegroundThemeColor;
+            Control.Layer.BorderColor = new CGColor ((float)c.R, (float)c.G, (float)c.B);
             Control.Layer.BorderWidth = 3;
             Control.ClipsToBounds = true;
         }
