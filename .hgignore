@@ -9,3 +9,4 @@ Android/obj/*
 iOS/bin/*
 iOS/obj/*
 NogginAgenda.WinPhone/NogginAgenda.WinPhone.csproj.user
+NogginAgenda.Data/bin/*
