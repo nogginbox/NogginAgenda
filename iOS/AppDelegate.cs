@@ -7,44 +7,32 @@ using MonoTouch.UIKit;
 
 using Xamarin.Forms;
 using System.IO;
+using NogginAgenda;
 
 namespace NogginAgenda.iOS
 {
-	[Register ("AppDelegate")]
-	public partial class AppDelegate : UIApplicationDelegate
-	{
-		UIWindow window;
+    [Register ("AppDelegate")]
+    public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
+    {
+        public override bool FinishedLaunching (UIApplication app, NSDictionary options)
+        {
+            String cachePath;
+            if (UIDevice.CurrentDevice.CheckSystemVersion (8, 0))
+            {
+                var url = NSFileManager.DefaultManager.GetUrls (NSSearchPathDirectory.CachesDirectory, NSSearchPathDomain.User) [0];
+                cachePath = url.Path;
+            }
+            else
+            {
+                var documents = Environment.GetFolderPath (Environment.SpecialFolder.MyDocuments);
+                cachePath = Path.GetFullPath (Path.Combine (documents, "..", "Library", "Caches"));
+            }
 
-		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
-		{
-			Forms.Init ();
+            global::Xamarin.Forms.Forms.Init ();
 
-			/*var pathBefore = Environment.GetFolderPath (Environment.SpecialFolder.Personal);
-			var cacheBefore = Path.Combine (pathBefore, "..", "Library", "Caches");
-			var cacheBeforeBits = cacheBefore.Split('/');
+            LoadApplication (new App (cachePath));
 
-			var cacheNow = NSFileManager.DefaultManager.GetUrls (NSSearchPathDirectory.CachesDirectory, NSSearchPathDomain.User);
-			var cacheNowBits = cacheNow[0].Path.Split('/');*/
-
-			String cachePath;
-			if (UIDevice.CurrentDevice.CheckSystemVersion (8, 0))
-			{
-				var url = NSFileManager.DefaultManager.GetUrls (NSSearchPathDirectory.CachesDirectory, NSSearchPathDomain.User) [0];
-				cachePath = url.Path;
-			}
-			else
-			{
-				var documents = Environment.GetFolderPath (Environment.SpecialFolder.MyDocuments);
-				cachePath = Path.GetFullPath (Path.Combine (documents, "..", "Library", "Caches"));
-			}
-
-			window = new UIWindow (UIScreen.MainScreen.Bounds);
-			
-			window.RootViewController = App.GetMainPage (cachePath).CreateViewController ();
-			window.MakeKeyAndVisible ();
-			
-			return true;
-		}
-	}
+            return base.FinishedLaunching (app, options);
+        }
+    }
 }
-
