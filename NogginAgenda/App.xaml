@@ -2,11 +2,21 @@
 <Application
 	xmlns="http://xamarin.com/schemas/2014/forms"
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+  xmlns:converters="clr-namespace:NogginAgenda.Xaml.Converters;assembly=NogginAgenda"
 	x:Class="NogginAgenda.App">
 
 	<Application.Resources>
-		<ResourceDictionary>\
+		<ResourceDictionary>
+      <converters:UriConverter x:Key="UriConverter"/>
 			<Color x:Key="ForegroundThemeColor">#632e8f</Color>
+          
+      <Style x:Key="SummaryHeader" TargetType="Button">
+        <Setter Property="Font" Value="Bold,Small" />
+      </Style>
+      <Style x:Key="SummarySubheader" TargetType="Button">
+        <Setter Property="Font" Value="Micro" />
+      </Style> 
+      
 		</ResourceDictionary>
 	</Application.Resources>
 </Application>

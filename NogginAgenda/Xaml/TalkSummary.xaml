@@ -5,13 +5,11 @@
 	xmlns:local="clr-namespace:NogginAgenda;assembly=NogginAgenda"
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 	xmlns:xaml="clr-namespace:NogginAgenda.Xaml;assembly=NogginAgenda"
-	xmlns:converters="clr-namespace:NogginAgenda.Xaml.Converters;assembly=NogginAgenda"
 	x:Class="NogginAgenda.TalkSummary"
 	Padding="0,10">
 
 	<ContentPage.Resources>
     	<ResourceDictionary>
-        	<converters:UriConverter x:Key="uriConverter"/>
     	</ResourceDictionary>
 	</ContentPage.Resources>
 
@@ -27,7 +25,7 @@
 
         <xaml:ImageWithLabel
         	Label="{Binding Room}"
-        	Source="{Binding Speaker.PictureUrl, Converter={StaticResource uriConverter}}"
+        	Source="{Binding Speaker.PictureUrl, Converter={StaticResource UriConverter}}"
         	WidthRequest="60"
         	HeightRequest="60"
         	VerticalOptions="Start"
@@ -35,8 +33,8 @@
         	LabelBackgroundColor="{StaticResource ForegroundThemeColor}" />
 
 		<StackLayout Grid.Column="1">
-			<Label Text="{Binding Title}" Font="Bold,Small" />
-			<Label Text="{Binding Speaker.Name}" Font="Micro" />
+			<Label Text="{Binding Title}" Style="{StaticResource SummaryHeader}" />
+			<Label Text="{Binding Speaker.Name}" Style="{StaticResource SummarySubheader}" />
 		</StackLayout>
 
 	</Grid>

@@ -5,12 +5,11 @@
 	xmlns:c="clr-namespace:NogginAgenda.CustomControls;assembly=NogginAgenda"
 	xmlns:local="clr-namespace:NogginAgenda;assembly=NogginAgenda"
 	x:Class="NogginAgenda.TalkDescriptionPage"
-	xmlns:converters="clr-namespace:NogginAgenda.Xaml.Converters;assembly=NogginAgenda"
 	Title="{Binding TimeAndRoom}">
 
 	<ContentPage.Resources>
     	<ResourceDictionary>
-        	<converters:UriConverter x:Key="uriConverter"/>
+        	
     	  </ResourceDictionary>
 	</ContentPage.Resources>
 
@@ -36,7 +35,7 @@
 		<!---<Image Source="{Binding Speaker.PictureUrl}" WidthRequest="100" HeightRequest="100" VerticalOptions="Start" /> -->
 		<c:CircleImage WidthRequest="80" HeightRequest="80" VerticalOptions="End" HorizontalOptions="Center">
 			<c:CircleImage.Source>
-              <UriImageSource Uri="{Binding Speaker.PictureUrl, Converter={StaticResource uriConverter}}" CacheValidity="5" CachingEnabled="{x:Static local:AppConstants.CacheImagesEnabled}" />
+              <UriImageSource Uri="{Binding Speaker.PictureUrl, Converter={StaticResource UriConverter}}" CacheValidity="5" CachingEnabled="{x:Static local:AppConstants.CacheImagesEnabled}" />
 			</c:CircleImage.Source>
 		</c:CircleImage>
 
