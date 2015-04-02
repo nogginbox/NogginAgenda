@@ -11,3 +11,4 @@ iOS/obj/*
 NogginAgenda.WinPhone/NogginAgenda.WinPhone.csproj.user
 NogginAgenda.Data/bin/*
 Android/NogginAgenda.Android.csproj.user
+NogginAgenda.userprefs

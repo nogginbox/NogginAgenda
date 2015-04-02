@@ -11,7 +11,7 @@ namespace NogginAgenda.WinPhone
             InitializeComponent();
 
             global::Xamarin.Forms.Forms.Init();
-            LoadApplication(new NogginAgenda.App());
+            LoadApplication(new NogginAgenda.App(null));
         }
     }
 }
