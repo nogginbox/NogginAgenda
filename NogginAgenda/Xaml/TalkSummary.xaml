@@ -32,7 +32,7 @@
         	HeightRequest="60"
         	VerticalOptions="Start"
         	HorizontalOptions="Start"
-        	LabelBackgroundColor="{x:Static local:AppConstants.ForegroundThemeColor}" />
+        	LabelBackgroundColor="{StaticResource ForegroundThemeColor}" />
 
 		<StackLayout Grid.Column="1">
 			<Label Text="{Binding Title}" Font="Bold,Small" />
