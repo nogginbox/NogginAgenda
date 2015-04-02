@@ -27,9 +27,9 @@
 		<BoxView Color="{StaticResource ForegroundThemeColor}" Grid.ColumnSpan="2" HeightRequest="100" VerticalOptions="Start" />
 			
 		<StackLayout Grid.Column="1" Padding="0,10,10,10">
-			<Label Text="{Binding Title}" Font="Bold,Small" TextColor="White" />
-			<Label Text="{Binding Subtitle}" Font="Bold,Micro" TextColor="White" />
-			<Label Text="{Binding Speaker.Name}" Font="Micro" TextColor="White" XAlign="End" />
+			<Label Text="{Binding Title}" Style="{StaticResource BannerHeader}" />
+			<Label Text="{Binding Subtitle}" Style="{StaticResource BannerSubheader}" />
+			<Label Text="{Binding Speaker.Name}" Style="{StaticResource BannerText}" XAlign="End" />
 		</StackLayout>
 
 		<!---<Image Source="{Binding Speaker.PictureUrl}" WidthRequest="100" HeightRequest="100" VerticalOptions="Start" /> -->
@@ -41,7 +41,7 @@
 
 		<ScrollView Grid.Row="1" Grid.ColumnSpan="2">
 			<StackLayout Padding="10">
-				<Label Text="{Binding Description}" Font="Small" />
+				<Label Text="{Binding Description}" Style="{StaticResource DetailBodyText}" />
 				<c:LinkButton Text="Website" Uri="{Binding Speaker.WebsiteUrl}" />
 				<c:LinkButton x:Name="TwitterLink" Text="Twitter" Uri="{Binding Speaker.TwitterUrl}" />
 			</StackLayout>

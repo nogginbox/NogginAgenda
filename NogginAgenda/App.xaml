@@ -15,7 +15,24 @@
 			</Style>
 			<Style x:Key="SummarySubheader" TargetType="Label">
 				<Setter Property="Font" Value="Micro" />
-			</Style> 
+			</Style>
+
+			<Style x:Key="BannerLabels" TargetType="Label">
+				<Setter Property="TextColor" Value="White" />
+			</Style>
+			<Style x:Key="BannerHeader" TargetType="Label" BasedOn="{StaticResource BannerLabels}">
+				<Setter Property="Font" Value="Bold,Small" />
+			</Style>
+			<Style x:Key="BannerSubheader" TargetType="Label" BasedOn="{StaticResource BannerLabels}">
+				<Setter Property="Font" Value="Bold,Micro" />
+			</Style>
+			<Style x:Key="BannerText" TargetType="Label" BasedOn="{StaticResource BannerLabels}">
+				<Setter Property="Font" Value="Micro" />
+			</Style>
+
+			<Style x:Key="DetailBodyText" TargetType="Label">
+				<Setter Property="Font" Value="Small" />
+			</Style>
 
 		</ResourceDictionary>
 	</Application.Resources>
