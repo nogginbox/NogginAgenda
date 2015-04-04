@@ -16,6 +16,8 @@ namespace NogginAgenda.Data
 
         public String Room { get; set; }
 
+        public String RoomLongName { get { return String.Format ("Room {0}", Room);} }
+
 		public Speaker Speaker { get; set; }
 
 		public TimeSlot TimeSlot { get; set; }

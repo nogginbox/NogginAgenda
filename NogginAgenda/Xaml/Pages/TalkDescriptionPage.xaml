@@ -5,14 +5,7 @@
 	xmlns:c="clr-namespace:NogginAgenda.CustomControls;assembly=NogginAgenda"
 	xmlns:local="clr-namespace:NogginAgenda;assembly=NogginAgenda"
 	x:Class="NogginAgenda.TalkDescriptionPage"
-	Title="{Binding TimeAndRoom}">
-
-	<ContentPage.Resources>
-    	<ResourceDictionary>
-        	
-    	  </ResourceDictionary>
-	</ContentPage.Resources>
-
+	Title="{Binding TimeSlot.ShortName}">
 
 	<Grid>
 		<Grid.RowDefinitions>
@@ -39,8 +32,14 @@
 			</c:CircleImage.Source>
 		</c:CircleImage>
 
+		<Grid Padding="0,0,10,5" Grid.ColumnSpan="2" >
+		<Label Text="{Binding RoomLongName}"
+			Style="{StaticResource BannerHeader}" TextColor="Gray"
+			VerticalOptions="End" HorizontalOptions="End" />
+		</Grid>
+
 		<ScrollView Grid.Row="1" Grid.ColumnSpan="2">
-			<StackLayout Padding="10">
+			<StackLayout Padding="10" Spacing="20">
 				<Label Text="{Binding Description}" Style="{StaticResource DetailBodyText}" />
 				<c:LinkButton Text="Website" Uri="{Binding Speaker.WebsiteUrl}" />
 				<c:LinkButton x:Name="TwitterLink" Text="Twitter" Uri="{Binding Speaker.TwitterUrl}" />
