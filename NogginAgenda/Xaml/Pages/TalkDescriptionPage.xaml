@@ -12,34 +12,36 @@
 			<RowDefinition Height="130" />
 			<RowDefinition Height="*" />
 		</Grid.RowDefinitions>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="100" />
-			<ColumnDefinition Width="*" />
-		</Grid.ColumnDefinitions>
 
-		<BoxView Color="{StaticResource ForegroundThemeColor}" Grid.ColumnSpan="2" HeightRequest="100" VerticalOptions="Start" />
-			
-		<StackLayout Grid.Column="1" Padding="0,10,10,10">
+
+		<BoxView
+			Color="{StaticResource ForegroundThemeColor}" HeightRequest="100" VerticalOptions="Start" />
+
+		<StackLayout Padding="10,5">
 			<Label Text="{Binding Title}" Style="{StaticResource BannerHeader}" />
-			<Label Text="{Binding Subtitle}" Style="{StaticResource BannerSubheader}" />
-			<Label Text="{Binding Speaker.Name}" Style="{StaticResource BannerText}" XAlign="End" />
+			<StackLayout Padding="90,0,10,10">
+				<Label Text="{Binding Subtitle}" Style="{StaticResource BannerSubheader}" />
+				<Label Text="{Binding Speaker.Name}" Style="{StaticResource BannerText}" XAlign="End" />
+			</StackLayout>
 		</StackLayout>
 
 		<!---<Image Source="{Binding Speaker.PictureUrl}" WidthRequest="100" HeightRequest="100" VerticalOptions="Start" /> -->
-		<c:CircleImage WidthRequest="80" HeightRequest="80" VerticalOptions="End" HorizontalOptions="Center">
-			<c:CircleImage.Source>
-              <UriImageSource Uri="{Binding Speaker.PictureUrl, Converter={StaticResource UriConverter}}" CacheValidity="5" CachingEnabled="{x:Static local:AppConstants.CacheImagesEnabled}" />
-			</c:CircleImage.Source>
-		</c:CircleImage>
-
-		<Grid Padding="0,0,10,5" Grid.ColumnSpan="2" >
-		<Label Text="{Binding RoomLongName}"
-			Style="{StaticResource BannerHeader}" TextColor="Gray"
-			VerticalOptions="End" HorizontalOptions="End" />
+		<Grid Padding="10,0,0,10">
+			<c:CircleImage WidthRequest="80" HeightRequest="80" VerticalOptions="End" HorizontalOptions="Start">
+				<c:CircleImage.Source>
+	              <UriImageSource Uri="{Binding Speaker.PictureUrl, Converter={StaticResource UriConverter}}" CacheValidity="5" CachingEnabled="{x:Static local:AppConstants.CacheImagesEnabled}" />
+				</c:CircleImage.Source>
+			</c:CircleImage>
 		</Grid>
 
-		<ScrollView Grid.Row="1" Grid.ColumnSpan="2">
-			<StackLayout Padding="10" Spacing="20">
+		<Grid Padding="0,110,10,5" Grid.RowSpan="2">
+			<Label Text="{Binding RoomLongName}"
+				Style="{StaticResource BannerHeader}" TextColor="Gray"
+				VerticalOptions="Start" HorizontalOptions="End" />
+		</Grid>
+
+		<ScrollView Grid.Row="1">
+			<StackLayout Padding="10,0,10,10" Spacing="20">
 				<Label Text="{Binding Description}" Style="{StaticResource DetailBodyText}" />
 				<c:LinkButton Text="Website" Uri="{Binding Speaker.WebsiteUrl}" />
 				<c:LinkButton x:Name="TwitterLink" Text="Twitter" Uri="{Binding Speaker.TwitterUrl}" />
