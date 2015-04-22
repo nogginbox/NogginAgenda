@@ -86,7 +86,7 @@ namespace NogginAgenda
 
         public static async Task InitEventData()
         {
-            await Task.Delay (2000);
+            //await Task.Delay (2000);
 
             try{
                 var json = await GetJson();
