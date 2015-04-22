@@ -38,6 +38,40 @@ namespace NogginAgenda
             EventData = new EventAgenda ();
         }
 
+        protected async override void OnStart ()
+        {
+            base.OnStart ();
+            if (App.EventData.Slots.Any ()) return;
+
+            var loadingPage = new LoadingPage ();
+            await loadingPage.Show(MainPage.Navigation);
+
+            await App.InitEventData();
+
+            // Carousel page needs to be constructed like this,
+            // Databinding ItemSource didn't work at time of making
+            _slotsPage.Title = "DDD North 2014";
+            _slotsPage.ItemsSource = App.EventData.Slots;
+            _slotsPage.ItemTemplate =  new DataTemplate(() => {
+                return new TalksListPage();
+            });
+
+            await loadingPage.Hide();
+          
+            /* Todo: Rethink how we show errors
+             * slotsPage.Appearing += (object sender, EventArgs e) => {
+                if(!String.IsNullOrEmpty(_errorMessage))
+                {
+                    var errorTitle = (EventData == null)
+                        ? "Error"
+                        : "Warning";
+
+                    (sender as Page).DisplayAlert(errorTitle, _errorMessage, "OK");
+                    // Todo: can cancel when no data close the app
+                }
+            };*/
+        }
+
         private Page CreateMainPage ()
         {
             _slotsPage = new CarouselPage();
@@ -46,22 +80,14 @@ namespace NogginAgenda
                 _slotsPage
             );
             _nav.BarTextColor = (Color)Resources["ForegroundThemeColor"];
-            _nav.Appearing += OnSlotsPageAppearing;
 
             return _nav;
         }
 
-        protected static void OnSlotsPageAppearing(object sender, EventArgs args)
-        {
-            // Show loading page as model.
-            // Loading page will pop itself once data is loaded
-            //var page = sender as CarouselPage;
-            _slotsPage.Navigation.PushModalAsync (new LoadingPage(_slotsPage));
-            _nav.Appearing -= OnSlotsPageAppearing;
-        }
-
         public static async Task InitEventData()
         {
+            await Task.Delay (2000);
+
             try{
                 var json = await GetJson();
 
