@@ -28,6 +28,8 @@ namespace NogginAgenda.Android
 		{
 			global::PCLStorage.Resource.String.ApplicationName = global::NogginAgenda.Android.Resource.String.ApplicationName;
 			global::PCLStorage.Resource.String.Hello = global::NogginAgenda.Android.Resource.String.Hello;
+			global::Xamarin.Forms.Platform.Resource.String.ApplicationName = global::NogginAgenda.Android.Resource.String.ApplicationName;
+			global::Xamarin.Forms.Platform.Resource.String.Hello = global::NogginAgenda.Android.Resource.String.Hello;
 		}
 		
 		public partial class Attribute
