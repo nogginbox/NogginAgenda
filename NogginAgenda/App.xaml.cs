@@ -41,20 +41,18 @@ namespace NogginAgenda
         protected async override void OnStart ()
         {
             base.OnStart ();
-            if (App.EventData.Slots.Any ()) return;
+            if (EventData.Slots.Any ()) return;
 
             var loadingPage = new LoadingPage ();
             await loadingPage.Show(MainPage.Navigation);
 
-            await App.InitEventData();
+            await InitEventData();
 
             // Carousel page needs to be constructed like this,
             // Databinding ItemSource didn't work at time of making
             _slotsPage.Title = "DDD North 2014";
-            _slotsPage.ItemsSource = App.EventData.Slots;
-            _slotsPage.ItemTemplate =  new DataTemplate(() => {
-                return new TalksListPage();
-            });
+            _slotsPage.ItemsSource = EventData.Slots;
+            _slotsPage.ItemTemplate =  new DataTemplate(() => new TalksListPage());
 
             await loadingPage.Hide();
           
@@ -189,8 +187,11 @@ namespace NogginAgenda
                 try
                 {
                     // Losing benefit of async - but fails on Android without it
+                    response = await client.GetAsync(RemoteDataPath);
+                    /* Android
                     var a = client.GetAsync(RemoteDataPath);
                     response = a.GetAwaiter().GetResult();
+                     */
                 }
                 catch (Exception e)
                 {
