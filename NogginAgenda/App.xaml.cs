@@ -50,7 +50,7 @@ namespace NogginAgenda
 
             // Carousel page needs to be constructed like this,
             // Databinding ItemSource didn't work at time of making
-            _slotsPage.Title = "DDD North 2014";
+            _slotsPage.Title = "DDD North 2015";
             _slotsPage.ItemsSource = EventData.Slots;
             _slotsPage.ItemTemplate =  new DataTemplate(() => new TalksListPage());
 
@@ -92,16 +92,16 @@ namespace NogginAgenda
                 // Now parse with JSON.Net
                 var jsonData = JsonConvert.DeserializeObject<DataHolder>(json);
 
-                UpdateEventDataFromJsonData(EventData, jsonData.Data);
+                UpdateEventDataFromJsonData(EventData, "DDD North 2015", jsonData.Data);
             }
             catch(Exception e) {
                 _errorMessage = e.Message;
             }
         }
 
-        private static void UpdateEventDataFromJsonData(EventAgenda eventData, IEnumerable<TalkData> talksJson)
+        private static void UpdateEventDataFromJsonData(EventAgenda eventData, String title, IEnumerable<TalkData> talksJson)
         {
-            eventData.EventName = "DDD North 2014";
+            eventData.EventName = title;
 
             var slots = new List<TimeSlot>();
 

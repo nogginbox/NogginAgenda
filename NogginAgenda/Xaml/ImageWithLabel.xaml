@@ -15,8 +15,8 @@
 			</c:CircleImage.Source>
 		</c:CircleImage>
 
-		<BoxView WidthRequest="20" HeightRequest="20" Color="{Binding LabelBackgroundColor}" HorizontalOptions="End" VerticalOptions="End" />
-		<Label Text="{Binding Label}" Font="Micro" TextColor="White" XAlign="Center" YAlign="Center" WidthRequest="20" HeightRequest="20" HorizontalOptions="End" VerticalOptions="End" />
+		<BoxView WidthRequest="30" HeightRequest="20" Color="{Binding LabelBackgroundColor}" HorizontalOptions="End" VerticalOptions="End" />
+		<Label Text="{Binding Label}" Font="Micro" TextColor="White" XAlign="Center" YAlign="Center" WidthRequest="30" HeightRequest="20" HorizontalOptions="End" VerticalOptions="End" />
 		
 	</Grid>
 
