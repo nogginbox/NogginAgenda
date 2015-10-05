@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 using System.ComponentModel;
-using MonoTouch.CoreGraphics;
+using CoreGraphics;
 using NogginAgenda.CustomControls;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
