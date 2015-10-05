@@ -15,7 +15,7 @@ namespace NogginAgenda
 {
     public partial class App : Application
     {
-        private const String RemoteDataPath = "http://www.garsonix.co.uk/temp/dddnorth2014.js";
+        private const String RemoteDataPath = "http://www.garsonix.co.uk/temp/dddnorth.js";
         private const String JsonCacheFileName = "agenda.json";
         private static String _cacheFolder;
         private static String _errorMessage = "";
@@ -50,7 +50,7 @@ namespace NogginAgenda
 
             // Carousel page needs to be constructed like this,
             // Databinding ItemSource didn't work at time of making
-            _slotsPage.Title = "DDD North 2015";
+            _slotsPage.Title = EventData.EventName;
             _slotsPage.ItemsSource = EventData.Slots;
             _slotsPage.ItemTemplate =  new DataTemplate(() => new TalksListPage());
 
@@ -92,17 +92,16 @@ namespace NogginAgenda
                 // Now parse with JSON.Net
                 var jsonData = JsonConvert.DeserializeObject<DataHolder>(json);
 
-                UpdateEventDataFromJsonData(EventData, "DDD North 2015", jsonData.Data);
+                EventData.EventName = jsonData.EventName ?? "DDD North";
+                UpdateEventDataFromJsonData(EventData, jsonData.Data);
             }
             catch(Exception e) {
                 _errorMessage = e.Message;
             }
         }
 
-        private static void UpdateEventDataFromJsonData(EventAgenda eventData, String title, IEnumerable<TalkData> talksJson)
+        private static void UpdateEventDataFromJsonData(EventAgenda eventData, IEnumerable<TalkData> talksJson)
         {
-            eventData.EventName = title;
-
             var slots = new List<TimeSlot>();
 
             foreach (var t in talksJson)

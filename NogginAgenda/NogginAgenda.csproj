@@ -105,16 +105,16 @@
   <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="Xaml\TalkSummary.xaml">
-      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="Xaml\Pages\TalkDescriptionPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="Xaml\Pages\TalksListPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="Xaml\Pages\LoadingPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="Xaml\Pages\TestPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
