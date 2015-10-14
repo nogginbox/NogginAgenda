@@ -46,7 +46,15 @@ namespace NogginAgenda
             var loadingPage = new LoadingPage ();
             await loadingPage.Show(MainPage.Navigation);
 
-            await InitEventData();
+
+			do {
+				_errorMessage = null;
+				await InitEventData ();
+
+				if (_errorMessage != null) {
+					await loadingPage.DisplayAlert ("Error", _errorMessage, "RETRY");
+				}
+			} while (_errorMessage != null);
 
             // Carousel page needs to be constructed like this,
             // Databinding ItemSource didn't work at time of making
@@ -55,19 +63,6 @@ namespace NogginAgenda
             _slotsPage.ItemTemplate =  new DataTemplate(() => new TalksListPage());
 
             await loadingPage.Hide();
-          
-            /* Todo: Rethink how we show errors
-             * slotsPage.Appearing += (object sender, EventArgs e) => {
-                if(!String.IsNullOrEmpty(_errorMessage))
-                {
-                    var errorTitle = (EventData == null)
-                        ? "Error"
-                        : "Warning";
-
-                    (sender as Page).DisplayAlert(errorTitle, _errorMessage, "OK");
-                    // Todo: can cancel when no data close the app
-                }
-            };*/
         }
 
         private Page CreateMainPage ()
