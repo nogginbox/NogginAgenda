@@ -58,6 +58,7 @@ namespace NogginAgenda
 
             // Carousel page needs to be constructed like this,
             // Databinding ItemSource didn't work at time of making
+
             _slotsPage.Title = EventData.EventName;
             _slotsPage.ItemsSource = EventData.Slots;
             _slotsPage.ItemTemplate =  new DataTemplate(() => new TalksListPage());
@@ -68,10 +69,9 @@ namespace NogginAgenda
         private Page CreateMainPage ()
         {
             _slotsPage = new CarouselPage();
+            _slotsPage.Children.Add (new ContentPage()); // Android requires a page before being added to tree (this page is removed)
 
-            _nav = new NavigationPage(
-                _slotsPage
-            );
+            _nav = new NavigationPage(_slotsPage);
             _nav.BarTextColor = (Color)Resources["ForegroundThemeColor"];
 
             return _nav;

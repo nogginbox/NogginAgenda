@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 using Android.App;
 using Android.Content;
@@ -14,7 +14,7 @@ using Xamarin.Forms.Platform.Android;
 namespace NogginAgenda.Android
 {
 	[Activity (
-		Label = "DDD North 2014",
+		Label = "DDD North",
 		Icon="@drawable/Icon",
 		MainLauncher = true,
 		ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
