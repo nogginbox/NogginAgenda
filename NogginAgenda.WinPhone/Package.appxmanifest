@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
-  <Identity Name="Garsonix.DDDNorth" Publisher="CN=43F3C6A1-12C5-4904-8234-5DEEEDEBF0D9" Version="1.2.0.0" />
+  <Identity Name="Garsonix.DDDNorth" Publisher="CN=43F3C6A1-12C5-4904-8234-5DEEEDEBF0D9" Version="1.3.0.0" />
   <mp:PhoneIdentity PhoneProductId="83a7fd1e-7523-499c-9ab1-95c4c915288e" PhonePublisherId="dab6d30c-c4b9-43bf-8853-e12b21a9c260" />
   <Properties>
     <DisplayName>DDD North</DisplayName>
@@ -16,7 +16,7 @@
   </Resources>
   <Applications>
     <Application Id="x83a7fd1ey7523y499cy9ab1y95c4c915288ex" Executable="AGHost.exe" EntryPoint="MainPage.xaml">
-      <m3:VisualElements DisplayName="DDD North 2014" Square150x150Logo="Assets\SquareTile150x150.png" Square44x44Logo="Assets\Logo.png" Description="DDD North is a free .NET conference in the North of England. This year we're in Leeds on Saturday 18 October 2014." ForegroundText="light" BackgroundColor="#464646" ToastCapable="false">
+      <m3:VisualElements DisplayName="DDD North" Square150x150Logo="Assets\SquareTile150x150.png" Square44x44Logo="Assets\Logo.png" Description="DDD North is a free .NET conference in the North of England." ForegroundText="light" BackgroundColor="#464646" ToastCapable="false">
         <m3:DefaultTile Square71x71Logo="Assets\SquareTile71x71.png">
         </m3:DefaultTile>
         <m3:SplashScreen Image="Assets\Splashscreen.png" />

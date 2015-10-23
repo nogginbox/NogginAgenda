@@ -11,7 +11,7 @@ using System.Resources;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Garsonix")]
 [assembly: AssemblyProduct("NogginAgenda.WinPhone")]
-[assembly: AssemblyCopyright("Copyright © Garsonix 2014")]
+[assembly: AssemblyCopyright("Copyright © Garsonix 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -32,6 +32,6 @@ using System.Resources;
 //
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
-[assembly: AssemblyVersion("1.2.0")]
-[assembly: AssemblyFileVersion("1.2.0")]
+[assembly: AssemblyVersion("1.3.0")]
+[assembly: AssemblyFileVersion("1.3.0")]
 [assembly: NeutralResourcesLanguageAttribute("en-US")]
